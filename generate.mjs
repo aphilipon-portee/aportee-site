@@ -11,7 +11,7 @@ const DATASET = 'production'
 
 const GROQ = `*[_type=="evenement" && statut in ["valide","coup-de-coeur"]] | order(dateHeure asc){
   _id, titre, accroche, ages, type, compositeursOeuvres,
-  dateHeure, datesTexte, lieu, arrondissement, duree, tarif, lienBilletterie, statut,
+  dateHeure, dates, datesTexte, lieu, arrondissement, duree, tarif, lienBilletterie, statut,
   latitude, longitude, source, lignes
 }`
 
@@ -82,7 +82,8 @@ const ROT = [-2.2, 1.6, -1.2, 2.1, -1.8, 1.1, -1.5, 2.4]
 // Icône « partager » classique : un rond relié à deux ronds (trait à la couleur du texte)
 const SHARE_ICON = `<svg class="ico-share" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><line x1="8.4" y1="10.9" x2="15.6" y2="6.6"/><line x1="8.4" y1="13.1" x2="15.6" y2="17.4"/></g><g fill="currentColor"><circle cx="18" cy="5.5" r="2.7"/><circle cx="6" cy="12" r="2.7"/><circle cx="18" cy="18.5" r="2.7"/></g></svg>`
 
-function carte(e, i) {
+function carte(e, i, isoOverride, expanded) {
+  const iso = isoOverride || e.dateHeure
   const ages = (e.ages || []).filter((a) => AGES[a])
   const prim = ages[0] ? AGES[ages[0]] : {tint: '#fffdf9', ink: '#16233F'}
   const pastilles = ages.map((a) => { const A = AGES[a]; return `<span class="pastille" style="background:${A.color};color:${A.ink}">${forme(A.shape, A.ink, 13)}${A.label}</span>` }).join('')
@@ -96,9 +97,9 @@ function carte(e, i) {
   const geo = typeof e.latitude === 'number' && typeof e.longitude === 'number' ? ` data-lat="${e.latitude}" data-lon="${e.longitude}"` : ''
   const ongoing = /^En cours/.test(e.datesTexte || '') ? '1' : '0'
   const id = (e._id || '').replace(/^drafts\./, '')
-  const h = heureParis(e.dateHeure), dmin = dureeMinutes(e.duree)
+  const h = heureParis(iso), dmin = dureeMinutes(e.duree)
   return `
-    <article class="carte" data-id="${echap(id)}" data-ages="${(e.ages || []).join(' ')}" data-date="${(e.dateHeure || '').slice(0, 10)}" data-ongoing="${ongoing}" data-lignes="${echap((e.lignes || []).join('|'))}" data-start="${echap(e.dateHeure || '')}" data-titre="${echap(e.titre)}" data-lieu="${echap(lieu)}" data-heure="${h}" data-dureemin="${dmin}"${geo}
+    <article class="carte" data-id="${echap(id)}" data-ages="${(e.ages || []).join(' ')}" data-date="${(iso || '').slice(0, 10)}" data-ongoing="${ongoing}" data-lignes="${echap((e.lignes || []).join('|'))}" data-start="${echap(iso || '')}" data-titre="${echap(e.titre)}" data-lieu="${echap(lieu)}" data-heure="${h}" data-dureemin="${dmin}"${geo}
       style="background:${prim.tint};transform:rotate(${ROT[i % ROT.length]}deg)">
       <button class="fav" type="button" aria-label="Ajouter aux favoris">♡</button>
       <div class="c-haut"><span class="type">${echap(meta)}</span>${cdc}</div>
@@ -106,7 +107,7 @@ function carte(e, i) {
       ${e.accroche ? `<p class="accroche">${echap(e.accroche)}</p>` : ''}
       ${compos}
       <div class="pastilles">${pastilles}</div>
-      <p class="infos">${echap(dateFr(e.dateHeure))}${e.datesTexte ? `<br><span class="autres">${echap(e.datesTexte)}</span>` : ''}<br>${lieu}<span class="dist"></span></p>
+      <p class="infos">${echap(dateFr(iso))}${!expanded && e.datesTexte ? `<br><span class="autres">${echap(e.datesTexte)}</span>` : ''}<br>${lieu}<span class="dist"></span></p>
       <div class="c-bas">
         <div class="c-boutons">
           <a class="billet" href="${echap(lienUtm(e.lienBilletterie))}" target="_blank" rel="noopener">Réserver${tarifCourt}</a>
@@ -172,7 +173,22 @@ const BOUTIQUE = `
   </section>`
 
 const evenements = await charger()
-const cartes = evenements.map((e, i) => carte(e, i)).join('\n')
+
+// Un bloc PAR DATE : on déplie chaque fiche sur ses dates à venir (champ "dates"),
+// puis on trie toutes les occurrences dans l'ordre chronologique.
+const DEBUT_JOUR = new Date(); DEBUT_JOUR.setHours(0, 0, 0, 0)
+const MAX_DATES = 12 // garde-fou : une fiche à très nombreuses dates ne noie pas l'agenda
+const occurrences = []
+for (const e of evenements) {
+  const aExpanser = Array.isArray(e.dates) && e.dates.length > 0
+  const brut = aExpanser ? e.dates : (e.dateHeure ? [e.dateHeure] : [])
+  let futur = brut.filter((d) => d && new Date(d) >= DEBUT_JOUR)
+  if (!futur.length && e.dateHeure) futur = [e.dateHeure] // au moins la date connue
+  futur = [...new Set(futur)].sort().slice(0, MAX_DATES)
+  for (const iso of futur) occurrences.push({e, iso, expanded: aExpanser})
+}
+occurrences.sort((a, b) => (a.iso || '').localeCompare(b.iso || ''))
+const cartes = occurrences.map((o, i) => carte(o.e, i, o.iso, o.expanded)).join('\n')
 const vide = `<p class="vide">Les premières sélections arrivent très bientôt. Revenez vite !</p>`
 
 // Toutes les lignes présentes dans l'agenda (pour la recherche "Ma ligne")
