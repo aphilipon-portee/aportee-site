@@ -256,6 +256,13 @@ const html = `<!doctype html>
   .actions{display:flex;gap:10px;flex-wrap:wrap;max-width:1180px;margin:0 auto;padding:18px 30px 0;align-items:center}
   .act{background:var(--ink);color:var(--cream);border:2px solid var(--ink);border-radius:22px;padding:9px 16px;font-family:var(--sans);font-weight:700;font-size:14px;cursor:pointer;transition:transform .12s ease,background .12s ease}
   .act:hover{transform:translateY(-2px)}
+  .zone{max-width:1180px;margin:0 auto;padding:6px 30px}
+  .zone.perso{background:#fff;border:2px solid var(--ink);border-radius:16px;margin:18px auto 6px;padding:14px 22px}
+  .zone.filtrer{padding-top:12px}
+  .zone-titre{display:block;font-family:var(--serif);font-weight:900;font-size:19px;margin:0 0 4px;letter-spacing:-.3px}
+  .zone.perso .zone-titre{color:var(--orange)}
+  .zone .filtres{padding:5px 0;max-width:none;margin:0}
+  .sep{width:1px;align-self:center;height:26px;background:rgba(22,35,63,.22);margin:0 6px}
   #btn-favoris.actif,#btn-mes-enfants.actif,.filtre[data-malin].actif{background:var(--orange);color:#fff;border-color:var(--orange)}
   .banniere{max-width:1180px;margin:10px auto 0;padding:8px 30px;font-weight:700}
   .banniere a{color:var(--orange)}
@@ -364,49 +371,52 @@ const html = `<!doctype html>
   ${TICKER}
 
   <div id="banniere-selection" class="banniere" style="display:none">👀 Une sélection partagée avec vous. <a href="./">Voir tout l'agenda</a></div>
-  <div class="actions">
-    <button id="btn-surprise" class="act" type="button">🎲 Surprends-moi</button>
-    <button id="btn-favoris" class="act" type="button">❤️ Mes favoris</button>
-    <button id="btn-partager" class="act" type="button">🔗 Partager ma sélection</button>
-    <span id="partage-msg" class="geo-msg"></span>
-  </div>
 
-  <div class="filtres" id="filtres-periode">
-    <span class="lab">Quand</span>
-    <button class="filtre actif" data-periode="tous">Toute l'année</button>
-    <button class="filtre" data-periode="mois">Ce mois-ci</button>
-    <button class="filtre" data-periode="weekend">Ce week-end</button>
-    <button class="filtre" data-periode="semaine">Cette semaine</button>
-  </div>
-  <div class="filtres" id="malin-row">
-    <span class="lab">Malin</span>
-    <button class="filtre" data-malin="sieste" type="button">🛏️ Compatible sieste</button>
-    <button class="filtre" data-malin="court" type="button">⏱️ Court (‹ 45 min)</button>
-  </div>
-  <div class="filtres" id="filtres-age">
-    <span class="lab">Âge</span>
-    <button class="filtre actif" data-age="tous">Tous</button>
-    <button class="filtre age03" data-age="0-3">0-3 ans</button>
-    <button class="filtre age36" data-age="3-6">3-6 ans</button>
-    <button class="filtre age612" data-age="6-12">6-12 ans</button>
-  </div>
-  <div class="filtres" id="enfants-row">
-    <span class="lab">Mes enfants</span>
-    <span id="enfants-liste" class="chips"></span>
-    <button id="btn-ajout-enfant" class="filtre" type="button">+ ajouter un enfant</button>
-    <button id="btn-mes-enfants" class="filtre" type="button" style="display:none">👶 Pour mes enfants</button>
-  </div>
-  <div class="filtres" id="geo">
-    <span class="lab">Où</span>
-    <button class="filtre" id="btn-geo">📍 Près de moi</button>
-    <span id="geo-msg" class="geo-msg"></span>
-  </div>
-  <div class="filtres" id="lignes">
-    <span class="lab">Ma ligne</span>
-    <input id="ligne-input" list="ligne-list" placeholder="ex. Métro 6, Bus 91… (sans changement)" autocomplete="off">
-    <datalist id="ligne-list">${ligneOptions}</datalist>
-    <span id="ligne-chips" class="chips"></span>
-  </div>
+  <section class="zone perso" aria-label="Pour vous">
+    <span class="zone-titre">Pour vous</span>
+    <div class="filtres" id="enfants-row">
+      <span class="lab">Mes enfants</span>
+      <span id="enfants-liste" class="chips"></span>
+      <button id="btn-ajout-enfant" class="filtre" type="button">+ ajouter un enfant</button>
+      <button id="btn-mes-enfants" class="filtre" type="button" style="display:none">👶 Pour mes enfants</button>
+    </div>
+    <div class="filtres" id="perso-actions">
+      <span class="lab">Mes outils</span>
+      <button id="btn-favoris" class="act" type="button">❤️ Mes favoris</button>
+      <button id="btn-surprise" class="act" type="button">🎲 Surprends-moi</button>
+      <button id="btn-partager" class="act" type="button">🔗 Partager ma sélection</button>
+      <span id="partage-msg" class="geo-msg"></span>
+    </div>
+  </section>
+
+  <section class="zone filtrer" aria-label="Filtrer l'agenda">
+    <span class="zone-titre">Filtrer l'agenda</span>
+    <div class="filtres" id="filtres-periode">
+      <span class="lab">Quand</span>
+      <button class="filtre actif" data-periode="tous">Toute l'année</button>
+      <button class="filtre" data-periode="mois">Ce mois-ci</button>
+      <button class="filtre" data-periode="weekend">Ce week-end</button>
+      <button class="filtre" data-periode="semaine">Cette semaine</button>
+      <span class="sep"></span>
+      <button class="filtre" data-malin="sieste" type="button">🛏️ Compatible sieste</button>
+      <button class="filtre" data-malin="court" type="button">⏱️ Court (‹ 45 min)</button>
+    </div>
+    <div class="filtres" id="filtres-age">
+      <span class="lab">Âge</span>
+      <button class="filtre actif" data-age="tous">Tous</button>
+      <button class="filtre age03" data-age="0-3">0-3 ans</button>
+      <button class="filtre age36" data-age="3-6">3-6 ans</button>
+      <button class="filtre age612" data-age="6-12">6-12 ans</button>
+    </div>
+    <div class="filtres" id="ou-row">
+      <span class="lab">Où</span>
+      <button class="filtre" id="btn-geo">📍 Près de moi</button>
+      <input id="ligne-input" list="ligne-list" placeholder="ex. Métro 6, Bus 91… (sans changement)" autocomplete="off">
+      <datalist id="ligne-list">${ligneOptions}</datalist>
+      <span id="ligne-chips" class="chips"></span>
+      <span id="geo-msg" class="geo-msg"></span>
+    </div>
+  </section>
 
   <main id="agenda">
     <div class="board" id="grille">${cartes || vide}</div>
@@ -471,14 +481,15 @@ const html = `<!doctype html>
       const btns = [...document.querySelectorAll(sel + ' .filtre')]
       btns.forEach((b) => b.addEventListener('click', () => { btns.forEach((x) => x.classList.remove('actif')); b.classList.add('actif'); set(b); appliquer() }))
     }
-    brancher('#filtres-periode', (b) => { curPer = b.dataset.periode })
+    const periBtns = [...document.querySelectorAll('#filtres-periode .filtre[data-periode]')]
+    periBtns.forEach((b) => b.addEventListener('click', () => { periBtns.forEach((x) => x.classList.remove('actif')); b.classList.add('actif'); curPer = b.dataset.periode; appliquer() }))
     document.querySelectorAll('#filtres-age .filtre').forEach((b) => b.addEventListener('click', () => {
       document.querySelectorAll('#filtres-age .filtre').forEach((x) => x.classList.remove('actif')); b.classList.add('actif')
       const a = b.dataset.age; curAges = a === 'tous' ? new Set() : new Set([a])
       const me = document.getElementById('btn-mes-enfants'); if (me) me.classList.remove('actif')
       appliquer()
     }))
-    document.querySelectorAll('#malin-row .filtre').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('.filtre[data-malin]').forEach((b) => b.addEventListener('click', () => {
       b.classList.toggle('actif'); const on = b.classList.contains('actif')
       if (b.dataset.malin === 'sieste') sieste = on; else court = on
       appliquer()
