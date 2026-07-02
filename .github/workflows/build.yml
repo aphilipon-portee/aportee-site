@@ -4,7 +4,7 @@ name: Régénérer le site à portée
 # en reprenant les dernières validations du cockpit.
 on:
   schedule:
-    - cron: '0 */4 * * *'   # toutes les 4 heures
+    - cron: '*/30 * * * *'   # toutes les 30 minutes (filet de sécurité)
   workflow_dispatch: {}      # bouton "régénérer maintenant"
 
 permissions:
