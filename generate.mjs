@@ -107,7 +107,7 @@ function carte(e, i) {
       <div class="c-bas">
         <div class="c-boutons">
           <a class="billet" href="${echap(lienUtm(e.lienBilletterie))}" target="_blank" rel="noopener">Réserver${tarifCourt}</a>
-          <button class="ics" type="button">📅 Mon agenda</button>
+          <button class="washare" type="button" aria-label="Partager sur WhatsApp">💬 Partager</button>
         </div>
         ${ocp}
       </div>
@@ -271,8 +271,8 @@ const html = `<!doctype html>
   .fav.on{background:var(--orange);color:#fff}
   .c-haut{padding-right:40px}
   .c-boutons{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-  .ics{background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:10px 12px;font-family:var(--sans);font-weight:700;font-size:13px;cursor:pointer}
-  .ics:hover{background:var(--ink);color:var(--cream)}
+  .washare{background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:10px 12px;font-family:var(--sans);font-weight:700;font-size:13px;cursor:pointer}
+  .washare:hover{background:var(--ink);color:var(--cream)}
   .carte.surprise{outline:4px solid var(--orange);outline-offset:3px;animation:pulse 1s ease 2}
   @keyframes pulse{0%,100%{outline-color:var(--orange)}50%{outline-color:var(--a03)}}
 
@@ -576,20 +576,13 @@ const html = `<!doctype html>
     })
     renderEnfants()
 
-    // Ajouter à mon agenda (.ics)
-    const slug = (s) => (s || 'evenement').toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-').slice(0, 40)
+    // Partager un événement sur WhatsApp
     cartes.forEach((c) => {
-      const b = c.querySelector('.ics'); if (!b) return
+      const b = c.querySelector('.washare'); if (!b) return
       b.addEventListener('click', () => {
-        const start = c.dataset.start; const d = start ? new Date(start) : null
-        if (!d || isNaN(d)) { alert('Date à confirmer pour cet événement.'); return }
-        const dm = parseInt(c.dataset.dureemin, 10); const end = new Date(d.getTime() + (isNaN(dm) ? 60 : dm) * 60000)
-        const fmt = (x) => { const s = x.toISOString().replace(/[-:]/g, ''); const i = s.indexOf('.'); return (i < 0 ? s : s.slice(0, i)) + 'Z' }
-        const bs = String.fromCharCode(92), crlf = String.fromCharCode(13, 10)
-        const esc = (s) => String(s || '').split(bs).join(bs + bs).split(',').join(bs + ',').split(';').join(bs + ';')
-        const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//a portee//FR', 'BEGIN:VEVENT', 'UID:' + c.dataset.id + '@aportee', 'DTSTAMP:' + fmt(new Date()), 'DTSTART:' + fmt(d), 'DTEND:' + fmt(end), 'SUMMARY:' + esc(c.dataset.titre), 'LOCATION:' + esc(c.dataset.lieu), 'END:VEVENT', 'END:VCALENDAR'].join(crlf)
-        const blob = new Blob([ics], {type: 'text/calendar'}); const u = URL.createObjectURL(blob)
-        const a = document.createElement('a'); a.href = u; a.download = slug(c.dataset.titre) + '.ics'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(u)
+        const lien = location.origin + location.pathname + '?sel=' + c.dataset.id
+        const txt = '🎵 ' + (c.dataset.titre || 'Un concert à portée') + ' — sur à portée : ' + lien
+        window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank')
       })
     })
 
