@@ -79,6 +79,9 @@ function dureeMinutes(d) {
 }
 const ROT = [-2.2, 1.6, -1.2, 2.1, -1.8, 1.1, -1.5, 2.4]
 
+// Icône « partager » classique : un rond relié à deux ronds (trait à la couleur du texte)
+const SHARE_ICON = `<svg class="ico-share" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><line x1="8.4" y1="10.9" x2="15.6" y2="6.6"/><line x1="8.4" y1="13.1" x2="15.6" y2="17.4"/></g><g fill="currentColor"><circle cx="18" cy="5.5" r="2.7"/><circle cx="6" cy="12" r="2.7"/><circle cx="18" cy="18.5" r="2.7"/></g></svg>`
+
 function carte(e, i) {
   const ages = (e.ages || []).filter((a) => AGES[a])
   const prim = ages[0] ? AGES[ages[0]] : {tint: '#fffdf9', ink: '#16233F'}
@@ -107,7 +110,7 @@ function carte(e, i) {
       <div class="c-bas">
         <div class="c-boutons">
           <a class="billet" href="${echap(lienUtm(e.lienBilletterie))}" target="_blank" rel="noopener">Réserver${tarifCourt}</a>
-          <button class="washare" type="button" aria-label="Partager sur WhatsApp">💬 Partager</button>
+          <button class="washare" type="button" aria-label="Partager sur WhatsApp">${SHARE_ICON} Partager</button>
         </div>
         ${ocp}
       </div>
@@ -254,11 +257,12 @@ const html = `<!doctype html>
   .chip button{border:none;background:var(--orange);color:#fff;width:18px;height:18px;border-radius:50%;cursor:pointer;line-height:1;font-size:12px;padding:0}
   /* Actions + nouveaux éléments */
   .actions{display:flex;gap:10px;flex-wrap:wrap;max-width:1180px;margin:0 auto;padding:18px 30px 0;align-items:center}
-  .act{background:var(--ink);color:var(--cream);border:2px solid var(--ink);border-radius:22px;padding:9px 16px;font-family:var(--sans);font-weight:700;font-size:14px;cursor:pointer;transition:transform .12s ease,background .12s ease}
+  .act{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:var(--cream);border:2px solid var(--ink);border-radius:22px;padding:9px 16px;font-family:var(--sans);font-weight:700;font-size:14px;cursor:pointer;transition:transform .12s ease,background .12s ease}
   .act:hover{transform:translateY(-2px)}
-  .zone{max-width:1180px;margin:0 auto;padding:6px 30px}
-  .zone.perso{background:#fff;border:2px solid var(--ink);border-radius:16px;margin:18px auto 6px;padding:14px 22px}
-  .zone.filtrer{padding-top:12px}
+  .zones{display:flex;flex-wrap:wrap;align-items:stretch;gap:16px;max-width:1180px;margin:18px auto 6px;padding:0 30px}
+  .zone{margin:0}
+  .zone.perso{flex:1 1 260px;max-width:330px;background:linear-gradient(160deg,rgba(239,74,40,.06),rgba(244,199,68,.08));border:1.5px solid rgba(22,35,63,.14);border-radius:18px;padding:14px 20px}
+  .zone.filtrer{flex:3 1 460px;background:rgba(22,35,63,.035);border:1.5px solid rgba(22,35,63,.10);border-radius:18px;padding:8px 20px 12px}
   .zone-titre{display:block;font-family:var(--serif);font-weight:900;font-size:19px;margin:0 0 4px;letter-spacing:-.3px}
   .zone.perso .zone-titre{color:var(--orange)}
   .zone .filtres{padding:5px 0;max-width:none;margin:0}
@@ -271,8 +275,9 @@ const html = `<!doctype html>
   .fav.on{background:var(--orange);color:#fff}
   .c-haut{padding-right:40px}
   .c-boutons{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-  .washare{background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:10px 12px;font-family:var(--sans);font-weight:700;font-size:13px;cursor:pointer}
+  .washare{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:10px 12px;font-family:var(--sans);font-weight:700;font-size:13px;cursor:pointer}
   .washare:hover{background:var(--ink);color:var(--cream)}
+  .ico-share{width:15px;height:15px;flex:none;display:block}
   .carte.surprise{outline:4px solid var(--orange);outline-offset:3px;animation:pulse 1s ease 2}
   @keyframes pulse{0%,100%{outline-color:var(--orange)}50%{outline-color:var(--a03)}}
 
@@ -372,6 +377,7 @@ const html = `<!doctype html>
 
   <div id="banniere-selection" class="banniere" style="display:none">👀 Une sélection partagée avec vous. <a href="./">Voir tout l'agenda</a></div>
 
+  <div class="zones">
   <section class="zone perso" aria-label="Pour vous">
     <span class="zone-titre">Pour vous</span>
     <div class="filtres" id="enfants-row">
@@ -384,7 +390,7 @@ const html = `<!doctype html>
       <span class="lab">Mes outils</span>
       <button id="btn-favoris" class="act" type="button">❤️ Mes favoris</button>
       <button id="btn-surprise" class="act" type="button">🎲 Surprends-moi</button>
-      <button id="btn-partager" class="act" type="button">🔗 Partager ma sélection</button>
+      <button id="btn-partager" class="act" type="button">${SHARE_ICON} Partager ma sélection</button>
       <span id="partage-msg" class="geo-msg"></span>
     </div>
   </section>
@@ -417,6 +423,7 @@ const html = `<!doctype html>
       <span id="geo-msg" class="geo-msg"></span>
     </div>
   </section>
+  </div>
 
   <main id="agenda">
     <div class="board" id="grille">${cartes || vide}</div>
