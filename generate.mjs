@@ -56,6 +56,27 @@ const FORMES = {
 }
 const forme = (shape, fill, size = 16) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true" style="flex:none"><g fill="${fill}">${FORMES[shape]}</g></svg>`
 const lienUtm = (url) => { if (!url) return '#'; const sep = url.includes('?') ? '&' : '?'; return `${url}${sep}utm_source=aportee&utm_medium=site` }
+
+// Heure de début (heure de Paris) pour "compatible sieste"
+function heureParis(iso) {
+  if (!iso) return ''
+  const d = new Date(iso)
+  if (isNaN(d)) return ''
+  const h = new Intl.DateTimeFormat('fr-FR', {timeZone: 'Europe/Paris', hour: 'numeric', hour12: false}).format(d)
+  return parseInt(h, 10)
+}
+// Durée en minutes (la plus longue trouvée) pour "court < 45 min"
+function dureeMinutes(d) {
+  if (!d) return ''
+  const s = String(d).toLowerCase()
+  const vals = []
+  let m
+  const reH = /(\d+)\s*h(?:\s*(\d+))?/g
+  while ((m = reH.exec(s))) vals.push(parseInt(m[1], 10) * 60 + (m[2] ? parseInt(m[2], 10) : 0))
+  const reM = /(\d+)\s*min/g
+  while ((m = reM.exec(s))) vals.push(parseInt(m[1], 10))
+  return vals.length ? Math.max(...vals) : ''
+}
 const ROT = [-2.2, 1.6, -1.2, 2.1, -1.8, 1.1, -1.5, 2.4]
 
 function carte(e, i) {
@@ -71,9 +92,12 @@ function carte(e, i) {
   const tarifCourt = e.tarif && e.tarif.length <= 18 ? ` · ${echap(e.tarif)}` : ''
   const geo = typeof e.latitude === 'number' && typeof e.longitude === 'number' ? ` data-lat="${e.latitude}" data-lon="${e.longitude}"` : ''
   const ongoing = /^En cours/.test(e.datesTexte || '') ? '1' : '0'
+  const id = (e._id || '').replace(/^drafts\./, '')
+  const h = heureParis(e.dateHeure), dmin = dureeMinutes(e.duree)
   return `
-    <article class="carte" data-ages="${(e.ages || []).join(' ')}" data-date="${(e.dateHeure || '').slice(0, 10)}" data-ongoing="${ongoing}" data-lignes="${echap((e.lignes || []).join('|'))}"${geo}
+    <article class="carte" data-id="${echap(id)}" data-ages="${(e.ages || []).join(' ')}" data-date="${(e.dateHeure || '').slice(0, 10)}" data-ongoing="${ongoing}" data-lignes="${echap((e.lignes || []).join('|'))}" data-start="${echap(e.dateHeure || '')}" data-titre="${echap(e.titre)}" data-lieu="${echap(lieu)}" data-heure="${h}" data-dureemin="${dmin}"${geo}
       style="background:${prim.tint};transform:rotate(${ROT[i % ROT.length]}deg)">
+      <button class="fav" type="button" aria-label="Ajouter aux favoris">♡</button>
       <div class="c-haut"><span class="type">${echap(meta)}</span>${cdc}</div>
       <h2 style="color:${prim.ink}">${echap(e.titre)}</h2>
       ${e.accroche ? `<p class="accroche">${echap(e.accroche)}</p>` : ''}
@@ -81,7 +105,10 @@ function carte(e, i) {
       <div class="pastilles">${pastilles}</div>
       <p class="infos">${echap(dateFr(e.dateHeure))}${e.datesTexte ? `<br><span class="autres">${echap(e.datesTexte)}</span>` : ''}<br>${lieu}<span class="dist"></span></p>
       <div class="c-bas">
-        <a class="billet" href="${echap(lienUtm(e.lienBilletterie))}" target="_blank" rel="noopener">Réserver${tarifCourt}</a>
+        <div class="c-boutons">
+          <a class="billet" href="${echap(lienUtm(e.lienBilletterie))}" target="_blank" rel="noopener">Réserver${tarifCourt}</a>
+          <button class="ics" type="button">📅 Mon agenda</button>
+        </div>
         ${ocp}
       </div>
     </article>`
@@ -225,6 +252,22 @@ const html = `<!doctype html>
   #ligne-chips{display:flex;gap:6px;flex-wrap:wrap}
   .chip{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:var(--cream);border-radius:20px;padding:5px 6px 5px 12px;font-size:13px;font-weight:700}
   .chip button{border:none;background:var(--orange);color:#fff;width:18px;height:18px;border-radius:50%;cursor:pointer;line-height:1;font-size:12px;padding:0}
+  /* Actions + nouveaux éléments */
+  .actions{display:flex;gap:10px;flex-wrap:wrap;max-width:1180px;margin:0 auto;padding:18px 30px 0;align-items:center}
+  .act{background:var(--ink);color:var(--cream);border:2px solid var(--ink);border-radius:22px;padding:9px 16px;font-family:var(--sans);font-weight:700;font-size:14px;cursor:pointer;transition:transform .12s ease,background .12s ease}
+  .act:hover{transform:translateY(-2px)}
+  #btn-favoris.actif,#btn-mes-enfants.actif,.filtre[data-malin].actif{background:var(--orange);color:#fff;border-color:var(--orange)}
+  .banniere{max-width:1180px;margin:10px auto 0;padding:8px 30px;font-weight:700}
+  .banniere a{color:var(--orange)}
+  .carte{position:relative}
+  .fav{position:absolute;top:12px;right:12px;background:#fff;border:2px solid var(--ink);border-radius:50%;width:34px;height:34px;font-size:16px;line-height:1;cursor:pointer;color:var(--orange);z-index:2;padding:0}
+  .fav.on{background:var(--orange);color:#fff}
+  .c-haut{padding-right:40px}
+  .c-boutons{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .ics{background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:10px 12px;font-family:var(--sans);font-weight:700;font-size:13px;cursor:pointer}
+  .ics:hover{background:var(--ink);color:var(--cream)}
+  .carte.surprise{outline:4px solid var(--orange);outline-offset:3px;animation:pulse 1s ease 2}
+  @keyframes pulse{0%,100%{outline-color:var(--orange)}50%{outline-color:var(--a03)}}
 
   /* Agenda */
   main{max-width:1180px;margin:0 auto;padding:20px 30px 70px}
@@ -320,6 +363,14 @@ const html = `<!doctype html>
 
   ${TICKER}
 
+  <div id="banniere-selection" class="banniere" style="display:none">👀 Une sélection partagée avec vous. <a href="./">Voir tout l'agenda</a></div>
+  <div class="actions">
+    <button id="btn-surprise" class="act" type="button">🎲 Surprends-moi</button>
+    <button id="btn-favoris" class="act" type="button">❤️ Mes favoris</button>
+    <button id="btn-partager" class="act" type="button">🔗 Partager ma sélection</button>
+    <span id="partage-msg" class="geo-msg"></span>
+  </div>
+
   <div class="filtres" id="filtres-periode">
     <span class="lab">Quand</span>
     <button class="filtre actif" data-periode="tous">Toute l'année</button>
@@ -327,12 +378,23 @@ const html = `<!doctype html>
     <button class="filtre" data-periode="weekend">Ce week-end</button>
     <button class="filtre" data-periode="semaine">Cette semaine</button>
   </div>
+  <div class="filtres" id="malin-row">
+    <span class="lab">Malin</span>
+    <button class="filtre" data-malin="sieste" type="button">🛏️ Compatible sieste</button>
+    <button class="filtre" data-malin="court" type="button">⏱️ Court (‹ 45 min)</button>
+  </div>
   <div class="filtres" id="filtres-age">
     <span class="lab">Âge</span>
     <button class="filtre actif" data-age="tous">Tous</button>
     <button class="filtre age03" data-age="0-3">0-3 ans</button>
     <button class="filtre age36" data-age="3-6">3-6 ans</button>
     <button class="filtre age612" data-age="6-12">6-12 ans</button>
+  </div>
+  <div class="filtres" id="enfants-row">
+    <span class="lab">Mes enfants</span>
+    <span id="enfants-liste" class="chips"></span>
+    <button id="btn-ajout-enfant" class="filtre" type="button">+ ajouter un enfant</button>
+    <button id="btn-mes-enfants" class="filtre" type="button" style="display:none">👶 Pour mes enfants</button>
   </div>
   <div class="filtres" id="geo">
     <span class="lab">Où</span>
@@ -370,7 +432,13 @@ const html = `<!doctype html>
 
   <script>
     const cartes = [...document.querySelectorAll('.carte')]
-    let curAge = 'tous', curPer = 'tous', userPos = null, curLignes = new Set()
+    let curAges = new Set(), curPer = 'tous', userPos = null, curLignes = new Set()
+    let sieste = false, court = false, favView = false, selection = null
+    const LS = { get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d } catch (e) { return d } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)) } catch (e) {} } }
+    let favoris = new Set(LS.get('aportee-favoris', []))
+    let enfants = LS.get('aportee-enfants', [])
+    const anneeCourante = new Date().getFullYear()
+    const tranchesAge = (a) => { const t = []; if (a < 4) t.push('0-3'); if (a >= 3 && a < 7) t.push('3-6'); if (a >= 6) t.push('6-12'); return [...new Set(t)] }
     const finSemaine = (now) => { const d = new Date(now); d.setDate(now.getDate() + ((7 - now.getDay()) % 7)); d.setHours(23, 59, 59, 999); return d }
     const finMois = (now) => new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999)
     function okPeriode(c) {
@@ -383,7 +451,11 @@ const html = `<!doctype html>
       if (curPer === 'weekend') { const wd = d.getDay(); return (wd === 0 || wd === 6) && (d - now) <= 7 * 864e5 }
       return true
     }
-    const okAge = (c) => curAge === 'tous' || (c.dataset.ages || '').split(' ').includes(curAge)
+    const okAge = (c) => curAges.size === 0 || (c.dataset.ages || '').split(' ').some((x) => curAges.has(x))
+    const okSieste = (c) => { if (!sieste) return true; const h = parseInt(c.dataset.heure, 10); return isNaN(h) ? false : (h < 13 || h >= 16) }
+    const okCourt = (c) => { if (!court) return true; const m = parseInt(c.dataset.dureemin, 10); return isNaN(m) ? false : m <= 45 }
+    const okFav = (c) => !favView || favoris.has(c.dataset.id)
+    const okSel = (c) => !selection || selection.has(c.dataset.id)
     function okLignes(c) {
       if (curLignes.size === 0) return true
       const ls = (c.dataset.lignes || '').split('|')
@@ -392,7 +464,7 @@ const html = `<!doctype html>
     }
     function appliquer() {
       let n = 0
-      cartes.forEach((c) => { const ok = okAge(c) && okPeriode(c) && okLignes(c); c.style.display = ok ? '' : 'none'; if (ok) n++ })
+      cartes.forEach((c) => { const ok = okAge(c) && okPeriode(c) && okLignes(c) && okSieste(c) && okCourt(c) && okFav(c) && okSel(c); c.style.display = ok ? '' : 'none'; if (ok) n++ })
       const v = document.getElementById('aucun'); if (v) v.style.display = n ? 'none' : ''
     }
     function brancher(sel, set) {
@@ -400,7 +472,17 @@ const html = `<!doctype html>
       btns.forEach((b) => b.addEventListener('click', () => { btns.forEach((x) => x.classList.remove('actif')); b.classList.add('actif'); set(b); appliquer() }))
     }
     brancher('#filtres-periode', (b) => { curPer = b.dataset.periode })
-    brancher('#filtres-age', (b) => { curAge = b.dataset.age })
+    document.querySelectorAll('#filtres-age .filtre').forEach((b) => b.addEventListener('click', () => {
+      document.querySelectorAll('#filtres-age .filtre').forEach((x) => x.classList.remove('actif')); b.classList.add('actif')
+      const a = b.dataset.age; curAges = a === 'tous' ? new Set() : new Set([a])
+      const me = document.getElementById('btn-mes-enfants'); if (me) me.classList.remove('actif')
+      appliquer()
+    }))
+    document.querySelectorAll('#malin-row .filtre').forEach((b) => b.addEventListener('click', () => {
+      b.classList.toggle('actif'); const on = b.classList.contains('actif')
+      if (b.dataset.malin === 'sieste') sieste = on; else court = on
+      appliquer()
+    }))
     function distKm(la1, lo1, la2, lo2) { const R = 6371, r = Math.PI / 180; const dLa = (la2 - la1) * r, dLo = (lo2 - lo1) * r; const a = Math.sin(dLa / 2) ** 2 + Math.cos(la1 * r) * Math.cos(la2 * r) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(a)) }
     const btnGeo = document.getElementById('btn-geo'), geoMsg = document.getElementById('geo-msg'), grille = document.getElementById('grille')
     btnGeo.addEventListener('click', () => {
@@ -433,6 +515,77 @@ const html = `<!doctype html>
     }
     ligneInput.addEventListener('change', () => { ajouterLigne(ligneInput.value.trim()); ligneInput.value = '' })
     ligneInput.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); ajouterLigne(ligneInput.value.trim()); ligneInput.value = '' } })
+
+    // Favoris (cœur)
+    const syncFav = (c) => { const b = c.querySelector('.fav'); const on = favoris.has(c.dataset.id); b.textContent = on ? '♥' : '♡'; b.classList.toggle('on', on) }
+    cartes.forEach((c) => { const b = c.querySelector('.fav'); if (!b) return; syncFav(c); b.addEventListener('click', () => { const id = c.dataset.id; if (favoris.has(id)) favoris.delete(id); else favoris.add(id); LS.set('aportee-favoris', [...favoris]); syncFav(c); if (favView) appliquer() }) })
+    document.getElementById('btn-favoris').addEventListener('click', function () { favView = !favView; this.classList.toggle('actif', favView); appliquer() })
+
+    // Partager la sélection
+    document.getElementById('btn-partager').addEventListener('click', () => {
+      const msg = document.getElementById('partage-msg')
+      if (favoris.size === 0) { msg.textContent = 'Ajoute d’abord des favoris ❤️ à partager.'; return }
+      const url = location.origin + location.pathname + '?sel=' + [...favoris].join(',')
+      if (navigator.clipboard) navigator.clipboard.writeText(url).catch(() => {})
+      window.open('https://wa.me/?text=' + encodeURIComponent('Ma sélection à portée : ' + url), '_blank')
+      msg.textContent = 'Lien copié, et WhatsApp ouvert.'
+    })
+
+    // Surprends-moi
+    document.getElementById('btn-surprise').addEventListener('click', () => {
+      const vis = cartes.filter((c) => c.style.display !== 'none'); if (!vis.length) return
+      const c = vis[Math.floor(Math.random() * vis.length)]
+      cartes.forEach((x) => x.classList.remove('surprise')); c.classList.add('surprise')
+      c.scrollIntoView({behavior: 'smooth', block: 'center'}); setTimeout(() => c.classList.remove('surprise'), 2500)
+    })
+
+    // Mes enfants
+    const enfantsListe = document.getElementById('enfants-liste'), btnMesEnfants = document.getElementById('btn-mes-enfants')
+    const ageBtns = [...document.querySelectorAll('#filtres-age .filtre')]
+    function renderEnfants() {
+      enfantsListe.innerHTML = ''
+      enfants.forEach((enf, idx) => {
+        const age = anneeCourante - enf.naissance
+        const chip = document.createElement('span'); chip.className = 'chip'; chip.textContent = enf.nom + ' ' + age + ' ans '
+        const b = document.createElement('button'); b.textContent = '×'; b.addEventListener('click', () => { enfants.splice(idx, 1); LS.set('aportee-enfants', enfants); renderEnfants() })
+        chip.appendChild(b); enfantsListe.appendChild(chip)
+      })
+      btnMesEnfants.style.display = enfants.length ? '' : 'none'
+    }
+    document.getElementById('btn-ajout-enfant').addEventListener('click', () => {
+      const nom = prompt('Prénom de l’enfant ?'); if (!nom) return
+      const age = parseInt(prompt('Son âge, en années ?'), 10); if (isNaN(age)) return
+      enfants.push({nom: nom.trim(), naissance: anneeCourante - age}); LS.set('aportee-enfants', enfants); renderEnfants()
+    })
+    btnMesEnfants.addEventListener('click', function () {
+      const on = !this.classList.contains('actif'); this.classList.toggle('actif', on)
+      if (on) { const s = new Set(); enfants.forEach((enf) => tranchesAge(anneeCourante - enf.naissance).forEach((t) => s.add(t))); curAges = s; ageBtns.forEach((x) => x.classList.remove('actif')) }
+      else { curAges = new Set(); const tb = ageBtns.find((x) => x.dataset.age === 'tous'); if (tb) tb.classList.add('actif') }
+      appliquer()
+    })
+    renderEnfants()
+
+    // Ajouter à mon agenda (.ics)
+    const slug = (s) => (s || 'evenement').toLowerCase().normalize('NFD').replace(/[^a-z0-9]+/g, '-').slice(0, 40)
+    cartes.forEach((c) => {
+      const b = c.querySelector('.ics'); if (!b) return
+      b.addEventListener('click', () => {
+        const start = c.dataset.start; const d = start ? new Date(start) : null
+        if (!d || isNaN(d)) { alert('Date à confirmer pour cet événement.'); return }
+        const dm = parseInt(c.dataset.dureemin, 10); const end = new Date(d.getTime() + (isNaN(dm) ? 60 : dm) * 60000)
+        const fmt = (x) => { const s = x.toISOString().replace(/[-:]/g, ''); const i = s.indexOf('.'); return (i < 0 ? s : s.slice(0, i)) + 'Z' }
+        const bs = String.fromCharCode(92), crlf = String.fromCharCode(13, 10)
+        const esc = (s) => String(s || '').split(bs).join(bs + bs).split(',').join(bs + ',').split(';').join(bs + ';')
+        const ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//a portee//FR', 'BEGIN:VEVENT', 'UID:' + c.dataset.id + '@aportee', 'DTSTAMP:' + fmt(new Date()), 'DTSTART:' + fmt(d), 'DTEND:' + fmt(end), 'SUMMARY:' + esc(c.dataset.titre), 'LOCATION:' + esc(c.dataset.lieu), 'END:VEVENT', 'END:VCALENDAR'].join(crlf)
+        const blob = new Blob([ics], {type: 'text/calendar'}); const u = URL.createObjectURL(blob)
+        const a = document.createElement('a'); a.href = u; a.download = slug(c.dataset.titre) + '.ics'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(u)
+      })
+    })
+
+    // Sélection partagée reçue par lien (?sel=)
+    const params = new URLSearchParams(location.search)
+    if (params.get('sel')) { selection = new Set(params.get('sel').split(',').filter(Boolean)); document.getElementById('banniere-selection').style.display = '' }
+    appliquer()
   </script>
 </body>
 </html>`
