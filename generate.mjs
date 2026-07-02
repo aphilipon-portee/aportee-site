@@ -18,7 +18,9 @@ const GROQ = `*[_type=="evenement" && statut in ["valide","coup-de-coeur"]] | or
 async function charger() {
   const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${encodeURIComponent(GROQ)}`
   const headers = {}
-  if (process.env.SANITY_TOKEN) headers.Authorization = `Bearer ${process.env.SANITY_TOKEN}`
+  // Nettoie la clé de tout caractère invisible (BOM, espaces) qui casserait l'en-tête HTTP.
+  const tok = (process.env.SANITY_TOKEN || '').replace(/[^\x21-\x7E]/g, '')
+  if (tok) headers.Authorization = `Bearer ${tok}`
   const rep = await fetch(url, {headers})
   if (!rep.ok) throw new Error(`Sanity a répondu ${rep.status}`)
   const {result} = await rep.json()
