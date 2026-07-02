@@ -12,7 +12,7 @@ const DATASET = 'production'
 const GROQ = `*[_type=="evenement" && statut in ["valide","coup-de-coeur"]] | order(dateHeure asc){
   _id, titre, accroche, ages, type, compositeursOeuvres,
   dateHeure, datesTexte, lieu, arrondissement, duree, tarif, lienBilletterie, statut,
-  latitude, longitude, source
+  latitude, longitude, source, lignes
 }`
 
 async function charger() {
@@ -72,7 +72,7 @@ function carte(e, i) {
   const geo = typeof e.latitude === 'number' && typeof e.longitude === 'number' ? ` data-lat="${e.latitude}" data-lon="${e.longitude}"` : ''
   const ongoing = /^En cours/.test(e.datesTexte || '') ? '1' : '0'
   return `
-    <article class="carte" data-ages="${(e.ages || []).join(' ')}" data-date="${(e.dateHeure || '').slice(0, 10)}" data-ongoing="${ongoing}"${geo}
+    <article class="carte" data-ages="${(e.ages || []).join(' ')}" data-date="${(e.dateHeure || '').slice(0, 10)}" data-ongoing="${ongoing}" data-lignes="${echap((e.lignes || []).join('|'))}"${geo}
       style="background:${prim.tint};transform:rotate(${ROT[i % ROT.length]}deg)">
       <div class="c-haut"><span class="type">${echap(meta)}</span>${cdc}</div>
       <h2 style="color:${prim.ink}">${echap(e.titre)}</h2>
@@ -145,6 +145,11 @@ const evenements = await charger()
 const cartes = evenements.map((e, i) => carte(e, i)).join('\n')
 const vide = `<p class="vide">Les premières sélections arrivent très bientôt. Revenez vite !</p>`
 
+// Toutes les lignes présentes dans l'agenda (pour la recherche "Ma ligne")
+const ordreMode = (l) => { const o = ['Métro', 'RER', 'Tram', 'Train', 'Bus']; const i = o.findIndex((m) => l.startsWith(m)); return i < 0 ? 9 : i }
+const toutesLignes = [...new Set(evenements.flatMap((e) => e.lignes || []))].sort((a, b) => (ordreMode(a) - ordreMode(b)) || a.localeCompare(b, 'fr', {numeric: true}))
+const ligneOptions = toutesLignes.map((l) => `<option value="${echap(l)}"></option>`).join('')
+
 const html = `<!doctype html>
 <html lang="fr">
 <head>
@@ -216,6 +221,10 @@ const html = `<!doctype html>
   .filtre.actif.age36{background:var(--a36);color:#173404;border-color:#173404}
   .filtre.actif.age612{background:var(--a612);color:#fff}
   .geo-msg{font-size:14px;opacity:.7}
+  #ligne-input{border:2px solid var(--ink);border-radius:22px;padding:7px 14px;font-family:var(--sans);font-size:14px;min-width:260px;background:#fff;color:var(--ink)}
+  #ligne-chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:var(--cream);border-radius:20px;padding:5px 6px 5px 12px;font-size:13px;font-weight:700}
+  .chip button{border:none;background:var(--orange);color:#fff;width:18px;height:18px;border-radius:50%;cursor:pointer;line-height:1;font-size:12px;padding:0}
 
   /* Agenda */
   main{max-width:1180px;margin:0 auto;padding:20px 30px 70px}
@@ -330,6 +339,12 @@ const html = `<!doctype html>
     <button class="filtre" id="btn-geo">📍 Près de moi</button>
     <span id="geo-msg" class="geo-msg"></span>
   </div>
+  <div class="filtres" id="lignes">
+    <span class="lab">Ma ligne</span>
+    <input id="ligne-input" list="ligne-list" placeholder="ex. Métro 6, Bus 91… (sans changement)" autocomplete="off">
+    <datalist id="ligne-list">${ligneOptions}</datalist>
+    <span id="ligne-chips" class="chips"></span>
+  </div>
 
   <main id="agenda">
     <div class="board" id="grille">${cartes || vide}</div>
@@ -355,7 +370,7 @@ const html = `<!doctype html>
 
   <script>
     const cartes = [...document.querySelectorAll('.carte')]
-    let curAge = 'tous', curPer = 'tous', userPos = null
+    let curAge = 'tous', curPer = 'tous', userPos = null, curLignes = new Set()
     const finSemaine = (now) => { const d = new Date(now); d.setDate(now.getDate() + ((7 - now.getDay()) % 7)); d.setHours(23, 59, 59, 999); return d }
     const finMois = (now) => new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999)
     function okPeriode(c) {
@@ -369,9 +384,15 @@ const html = `<!doctype html>
       return true
     }
     const okAge = (c) => curAge === 'tous' || (c.dataset.ages || '').split(' ').includes(curAge)
+    function okLignes(c) {
+      if (curLignes.size === 0) return true
+      const ls = (c.dataset.lignes || '').split('|')
+      for (const l of ls) if (curLignes.has(l)) return true
+      return false
+    }
     function appliquer() {
       let n = 0
-      cartes.forEach((c) => { const ok = okAge(c) && okPeriode(c); c.style.display = ok ? '' : 'none'; if (ok) n++ })
+      cartes.forEach((c) => { const ok = okAge(c) && okPeriode(c) && okLignes(c); c.style.display = ok ? '' : 'none'; if (ok) n++ })
       const v = document.getElementById('aucun'); if (v) v.style.display = n ? 'none' : ''
     }
     function brancher(sel, set) {
@@ -396,6 +417,22 @@ const html = `<!doctype html>
         ;[...cartes].sort((a, b) => { const ka = parseFloat(a.dataset.km), kb = parseFloat(b.dataset.km); if (isNaN(ka)) return 1; if (isNaN(kb)) return -1; return ka - kb }).forEach((c) => grille.appendChild(c))
       }, () => { geoMsg.textContent = 'Localisation refusée.' })
     })
+    // Ma ligne : ajouter / retirer des lignes
+    const ligneInput = document.getElementById('ligne-input')
+    const ligneChips = document.getElementById('ligne-chips')
+    const dispo = new Set([...document.querySelectorAll('#ligne-list option')].map((o) => o.value))
+    function ajouterLigne(l) {
+      if (!l || curLignes.has(l) || !dispo.has(l)) return
+      curLignes.add(l)
+      const chip = document.createElement('span')
+      chip.className = 'chip'
+      chip.textContent = l + ' '
+      const b = document.createElement('button'); b.textContent = '×'; b.setAttribute('aria-label', 'retirer')
+      b.addEventListener('click', () => { curLignes.delete(l); chip.remove(); appliquer() })
+      chip.appendChild(b); ligneChips.appendChild(chip); appliquer()
+    }
+    ligneInput.addEventListener('change', () => { ajouterLigne(ligneInput.value.trim()); ligneInput.value = '' })
+    ligneInput.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); ajouterLigne(ligneInput.value.trim()); ligneInput.value = '' } })
   </script>
 </body>
 </html>`
