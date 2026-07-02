@@ -1,0 +1,37 @@
+name: Régénérer le site à portée
+
+# Le site se reconstruit tout seul plusieurs fois par jour (et à la demande),
+# en reprenant les dernières validations du cockpit.
+on:
+  schedule:
+    - cron: '0 */4 * * *'   # toutes les 4 heures
+  workflow_dispatch: {}      # bouton "régénérer maintenant"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Régénérer le site
+        env:
+          SANITY_TOKEN: ${{ secrets.SANITY_TOKEN }}
+        run: node generate.mjs
+      - name: Publier si le site a changé
+        run: |
+          git config user.name "à portée (auto)"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          if git diff --staged --quiet; then
+            echo "Aucun changement, rien à publier."
+          else
+            git commit -m "Mise à jour automatique du site"
+            git push
+          fi
