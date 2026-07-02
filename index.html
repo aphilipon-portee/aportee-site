@@ -1,0 +1,1062 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>à portée — la belle musique à hauteur d'enfant</title>
+<meta name="description" content="L'agenda de la belle musique pour les familles à Paris. Concerts et spectacles pour les 0-12 ans, choisis un par un, jamais au hasard. Une initiative de l'Orchestre de chambre de Paris.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--cream:#F5ECDD;--ink:#16233F;--orange:#EF4A28;--a03:#F4C744;--a36:#7CC366;--a612:#2F6BEF;--famille:#D4537E;
+    --serif:"Fraunces",Georgia,serif;--sans:"DM Sans",Arial,sans-serif}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.5;overflow-x:hidden}
+  a{color:inherit}
+
+  /* Header */
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 30px;position:relative;z-index:6;flex-wrap:wrap}
+  .wm{font-family:var(--serif);font-weight:900;font-size:26px;letter-spacing:-.5px}
+  nav.pills{display:flex;gap:8px;flex-wrap:wrap}
+  nav.pills a{background:#fff;border:2px solid var(--ink);border-radius:22px;padding:7px 15px;font-weight:700;font-size:14px;text-decoration:none;display:inline-block;transition:transform .12s ease,background .12s ease,color .12s ease}
+  nav.pills a:hover{background:var(--ink);color:var(--cream);transform:translateY(-2px)}
+
+  /* Hero vibration */
+  .hero{position:relative;min-height:76vh;padding:14px 30px 0;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+  .shape{position:absolute;z-index:0}
+  .shape.cercle{top:-120px;right:-90px;width:420px;height:420px;border:26px solid var(--a03);border-radius:50%}
+  .shape.losange{bottom:30px;left:-80px;width:210px;height:210px;background:var(--a612);transform:rotate(45deg);opacity:.9}
+  .shape.triangle{top:36%;right:7%;width:0;height:0;border-left:70px solid transparent;border-right:70px solid transparent;border-bottom:120px solid var(--a36);opacity:.9;transform:rotate(12deg)}
+  .waves{position:absolute;left:-10%;right:-10%;top:32%;z-index:0;opacity:.5}
+  .waves svg{width:120%;display:block}
+  .waves svg path{animation:onde 6s linear infinite}
+  .waves svg:nth-child(2) path{animation-duration:8s;animation-direction:reverse}
+  @keyframes onde{from{transform:translateX(0)}to{transform:translateX(-160px)}}
+  .note-zone{position:absolute;left:8%;top:32%;z-index:1;width:20px;height:20px}
+  .note-dot{position:absolute;left:0;top:0;width:20px;height:20px;background:var(--orange);border-radius:50%;z-index:2}
+  .ripple{position:absolute;left:10px;top:10px;width:20px;height:20px;margin:-10px;border:3px solid var(--orange);border-radius:50%;transform:scale(.2);opacity:.7;animation:ripple 3.2s ease-out infinite}
+  .ripple:nth-child(2){animation-delay:1s}.ripple:nth-child(3){animation-delay:2s}
+  @keyframes ripple{to{transform:scale(6);opacity:0}}
+
+  .eyebrow{position:relative;z-index:3;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange);font-size:14px;margin:0 0 10px}
+  .title{position:relative;z-index:3;font-family:var(--serif);font-weight:900;line-height:.82;letter-spacing:-2px;margin:0}
+  .title .line{display:block;font-size:clamp(46px,12vw,142px)}
+  .title .l2{margin-left:.18em}.title .l3{margin-left:.06em}
+  .title .word{display:inline-block;color:var(--ink);text-shadow:6px 0 var(--orange),-6px 0 var(--a612)}
+  .title .outline{color:transparent;-webkit-text-stroke:2.5px var(--ink);text-shadow:none;animation:none !important}
+  .title .word:hover{animation:shake .28s linear infinite}
+  @keyframes buzz{0%,100%{text-shadow:6px 0 var(--orange),-6px 0 var(--a612)}50%{text-shadow:5px 2px var(--orange),-5px -2px var(--a612)}}
+  @keyframes shake{0%,100%{transform:translate(0,0)}25%{transform:translate(-2px,1px)}50%{transform:translate(2px,-1px)}75%{transform:translate(-1px,-2px)}}
+  .sub{position:relative;z-index:3;font-size:clamp(16px,2vw,20px);max-width:540px;margin:26px 0 0;font-weight:500}
+  .cta{position:relative;z-index:3;display:inline-block;align-self:flex-start;margin:22px 0 30px;background:var(--orange);color:#fff;border:2.5px solid var(--ink);border-radius:12px;padding:14px 24px;font-weight:700;text-decoration:none;font-size:17px;transition:transform .15s ease,background .15s ease}
+  .cta:hover{background:var(--ink);transform:scale(1.05) rotate(-1deg)}
+
+  /* Ticker */
+  .ticker{background:var(--ink);color:var(--cream);overflow:hidden;white-space:nowrap;padding:13px 0;font-family:var(--serif);font-weight:900;font-size:24px}
+  .ticker .run{display:inline-block;animation:defile 24s linear infinite}
+  .ticker .run span{margin:0 8px}.ticker .d{color:var(--orange)}
+  @keyframes defile{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* Filtres */
+  .filtres{display:flex;gap:8px;flex-wrap:wrap;max-width:1180px;margin:0 auto;padding:8px 30px;align-items:center}
+  .filtres:first-of-type{padding-top:22px}
+  .lab{font-size:12px;text-transform:uppercase;letter-spacing:1px;font-weight:700;opacity:.6;margin-right:2px}
+  .filtre{background:#fff;border:2px solid var(--ink);border-radius:22px;padding:7px 14px;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:500;transition:transform .12s ease,border-color .12s ease,background .12s ease}
+  .filtre:hover{border-color:var(--orange);transform:translateY(-2px)}
+  .filtre.actif{background:var(--ink);color:var(--cream)}
+  .filtre.actif.age03{background:var(--a03);color:#412402;border-color:#412402}
+  .filtre.actif.age36{background:var(--a36);color:#173404;border-color:#173404}
+  .filtre.actif.age612{background:var(--a612);color:#fff}
+  .geo-msg{font-size:14px;opacity:.7}
+
+  /* Agenda */
+  main{max-width:1180px;margin:0 auto;padding:20px 30px 70px}
+  .board{column-width:300px;column-gap:22px}
+  .carte{break-inside:avoid;-webkit-column-break-inside:avoid;border:2px solid var(--ink);border-radius:14px;padding:20px;margin:0 0 22px;display:flex;flex-direction:column;transition:transform .22s ease}
+  .carte h2{transition:color .18s ease,text-shadow .18s ease}
+  .carte:hover{transform:rotate(0deg) translateY(-5px) scale(1.015) !important}
+  .carte:hover h2{color:var(--ink) !important;text-shadow:3px 0 var(--orange),-3px 0 var(--a612)}
+  .c-haut{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px}
+  .type{font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:700;opacity:.7}
+  .cdc{display:inline-flex;align-items:center;gap:5px;background:var(--orange);color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:12px;white-space:nowrap;transform:rotate(4deg)}
+  .carte h2{font-family:var(--serif);font-weight:700;font-size:22px;line-height:1.15;margin:2px 0 8px}
+  .accroche{margin:0 0 10px;font-size:15px}
+  .compos{margin:0 0 10px;font-family:var(--serif);font-style:italic;font-size:14px;opacity:.85}
+  .pastilles{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .pastille{display:inline-flex;align-items:center;gap:5px;padding:3px 9px 3px 6px;border-radius:20px;font-size:12px;font-weight:700}
+  .infos{font-size:14px;margin:0 0 16px;opacity:.9}
+  .autres{font-style:italic;opacity:.8}.dist{color:var(--orange);font-weight:700}
+  .c-bas{margin-top:auto;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+  .billet{background:var(--orange);color:#fff;text-decoration:none;font-weight:700;padding:11px 16px;border-radius:10px;border:2px solid var(--ink);display:inline-block;transition:transform .15s ease,background .15s ease}
+  .billet:hover{background:var(--ink);transform:scale(1.04)}
+  .ocp{font-size:11px;opacity:.7}
+  .vide{text-align:center;font-family:var(--serif);font-style:italic;font-size:18px;opacity:.7;padding:50px 0}
+
+  /* Footer */
+  footer{background:var(--ink);color:var(--cream)}
+  .foot{max-width:1180px;margin:0 auto;padding:46px 30px;display:flex;gap:34px;flex-wrap:wrap;justify-content:space-between}
+  .foot .news h3{font-family:var(--serif);font-weight:900;font-size:30px;margin:0 0 12px;text-shadow:3px 0 var(--orange),-3px 0 var(--a612)}
+  .foot form{display:flex;gap:8px;flex-wrap:wrap}
+  .foot input{border:2px solid var(--cream);border-radius:10px;padding:11px 13px;font-family:var(--sans);font-size:15px;background:transparent;color:var(--cream);min-width:210px}
+  .foot input::placeholder{color:#b9c2d2}
+  .foot .sinscrire{background:var(--orange);color:#fff;border:none;border-radius:10px;padding:11px 18px;font-weight:700;font-family:var(--sans);cursor:pointer;transition:transform .15s ease}
+  .foot .sinscrire:hover{transform:scale(1.05)}
+  .foot .meta{font-size:14px;opacity:.85;max-width:280px}
+  .foot .meta a{color:var(--orange);text-decoration:none;font-weight:700}
+
+  /* Instagram dans le header */
+  nav.pills a.ig{display:inline-flex;align-items:center;justify-content:center;padding:7px 11px}
+
+  /* Sections Playlists / Médiation / Boutique */
+  .band{max-width:1180px;margin:0 auto;padding:54px 30px}
+  .band .eyebrow{position:static}
+  .sec{font-family:var(--serif);font-weight:900;font-size:clamp(30px,5.4vw,54px);line-height:.92;margin:0 0 8px;letter-spacing:-1px}
+  .sec .e{text-shadow:3px 0 var(--orange),-3px 0 var(--a612)}
+  .intro{max-width:560px;margin:0 0 24px;font-weight:500;font-size:17px}
+  .plgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+  .pl{border:2px solid var(--ink);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:4px;text-decoration:none;color:var(--ink);transition:transform .18s ease}
+  .pl:hover{transform:translateY(-5px) rotate(-1deg)}
+  .pl .play{width:44px;height:44px;border-radius:50%;background:var(--orange);border:2px solid var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;margin-bottom:8px}
+  .pl h3{font-family:var(--serif);font-weight:700;font-size:19px;margin:2px 0 2px;line-height:1.15}
+  .pl p{font-size:14px;margin:0;opacity:.85}
+  .pl1{background:#FBEFC6}.pl2{background:#E4F3D9}.pl3{background:#DCE6FE}.pl4{background:#F7DCE4}
+  .medgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+  .med{border:2px dashed var(--ink);border-radius:14px;padding:20px 18px;position:relative;background:#fffdf9}
+  .med .tag{position:absolute;top:-11px;left:14px;background:var(--a612);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:10px;transform:rotate(-3deg)}
+  .med h3{font-family:var(--serif);font-weight:700;font-size:19px;margin:4px 0 6px}
+  .med p{font-size:14px;margin:0;opacity:.85}
+  .boutique{background:var(--orange);color:#fff;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+  .bout-in{max-width:1180px;margin:0 auto;padding:42px 30px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .boutique .sec{color:#fff}
+  .boutique .sec .e2{color:var(--ink)}
+  .boutique .eyebrow{color:var(--ink)}
+  .intro2{margin:8px 0 0;font-weight:500;max-width:430px}
+  .bout-shapes{font-size:46px;letter-spacing:10px;opacity:.92}
+
+  @media (prefers-reduced-motion: no-preference){
+    .title .word{animation:buzz 2.6s ease-in-out infinite}
+    .title .word:nth-child(1){animation-delay:.2s}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .waves svg path,.ripple,.ticker .run{animation:none}
+  }
+  @media(max-width:600px){.title .l2,.title .l3{margin-left:0}.shape.cercle{width:240px;height:240px;top:-70px;right:-60px}}
+</style>
+</head>
+<body>
+  <header class="top">
+    <span class="wm">à portée</span>
+    <nav class="pills"><a href="#agenda">Agenda</a><a href="#playlists">Playlists</a><a href="#mediation">Médiation</a><a href="#boutique">Boutique</a><a class="ig" href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a></nav>
+  </header>
+
+  <section class="hero">
+    
+  <div class="shape cercle" aria-hidden="true"></div>
+  <div class="shape losange" aria-hidden="true"></div>
+  <div class="shape triangle" aria-hidden="true"></div>
+  <div class="waves" aria-hidden="true">
+    <svg viewBox="0 0 480 60" preserveAspectRatio="none"><path d="M0 30 Q40 0 80 30 T160 30 T240 30 T320 30 T400 30 T480 30" fill="none" stroke="var(--ink)" stroke-width="3"/></svg>
+    <svg viewBox="0 0 480 60" preserveAspectRatio="none" style="margin-top:22px"><path d="M0 30 Q40 60 80 30 T160 30 T240 30 T320 30 T400 30 T480 30" fill="none" stroke="var(--orange)" stroke-width="3"/></svg>
+  </div>
+  <div class="note-zone" aria-hidden="true"><span class="ripple"></span><span class="ripple"></span><span class="ripple"></span><span class="note-dot"></span></div>
+    <p class="eyebrow">notre sélection · Paris · 0-12 ans</p>
+    <h1 class="title">
+      <span class="line"><span class="word">la belle</span></span>
+      <span class="line l2"><span class="word outline">musique</span></span>
+      <span class="line l3"><span class="word">à hauteur d'enfant.</span></span>
+    </h1>
+    <p class="sub">On choisit pour vous les concerts et spectacles qui font vibrer les petites oreilles. Un par un, jamais au hasard.</p>
+    <a class="cta" href="#agenda">Voir l'agenda</a>
+  </section>
+
+  <div class="ticker" aria-hidden="true"><div class="run"><span>belle musique</span><span class="d">◆</span><span>à hauteur d'enfant</span><span class="d">●</span><span>à Paris</span><span class="d">▲</span><span>0-12 ans</span><span class="d">★</span><span>belle musique</span><span class="d">◆</span><span>à hauteur d'enfant</span><span class="d">●</span><span>à Paris</span><span class="d">▲</span><span>0-12 ans</span><span class="d">★</span></div></div>
+
+  <div class="filtres" id="filtres-periode">
+    <span class="lab">Quand</span>
+    <button class="filtre actif" data-periode="tous">Toute l'année</button>
+    <button class="filtre" data-periode="mois">Ce mois-ci</button>
+    <button class="filtre" data-periode="weekend">Ce week-end</button>
+    <button class="filtre" data-periode="semaine">Cette semaine</button>
+  </div>
+  <div class="filtres" id="filtres-age">
+    <span class="lab">Âge</span>
+    <button class="filtre actif" data-age="tous">Tous</button>
+    <button class="filtre age03" data-age="0-3">0-3 ans</button>
+    <button class="filtre age36" data-age="3-6">3-6 ans</button>
+    <button class="filtre age612" data-age="6-12">6-12 ans</button>
+  </div>
+  <div class="filtres" id="geo">
+    <span class="lab">Où</span>
+    <button class="filtre" id="btn-geo">📍 Près de moi</button>
+    <span id="geo-msg" class="geo-msg"></span>
+  </div>
+
+  <main id="agenda">
+    <div class="board" id="grille">
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-01" data-ongoing="1" data-lat="48.8531763614937" data-lon="2.31236162055988"
+      style="background:#FBEFC6;transform:rotate(-2.2deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Aura Invalides, l'expérience immersive</h2>
+      <p class="accroche">Découvrez AURA INVALIDES, l’expérience immersive au cœur du Dôme des Invalides à Paris.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">1 juillet 2026 · 14h47<br><span class="autres">En cours, jusqu'au 31 déc. 2027</span><br>Dôme des Invalides · 7e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://aura-invalides.com/fr_FR/products/indiv/aura-invalides?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-01" data-ongoing="1" data-lat="48.8891921088251" data-lon="2.39355686595773"
+      style="background:#FBEFC6;transform:rotate(1.6deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Tout le programme du festival Days Off à la Philharmonie de Paris</h2>
+      <p class="accroche">Le festival revient pour une édition resserrée, alliant têtes d’affiche historiques et découvertes, à la Philharmonie de Paris.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">1 juillet 2026 · 14h47<br><span class="autres">En cours, jusqu'au 5 juil. 2026</span><br>Philharmonie de Paris · 19e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://daysoff.fr/fr/billetterie?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · payant</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-01" data-ongoing="1" data-lat="48.8604860236053" data-lon="2.23703399653233"
+      style="background:#FBEFC6;transform:rotate(-1.2deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les Culturelles de Bagatelle au Parc de Bagatelle</h2>
+      <p class="accroche">Les Culturelles de Bagatelle vous donnent rendez-vous à l'Orangerie du Parc de Bagatelle avec 3 périodes et 3 temps forts : Le Mai musical avec des concerts classiques et jazz, Août en fête avec ses s</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">1 juillet 2026 · 14h47<br><span class="autres">En cours, jusqu'au 6 sept. 2026</span><br>Orangerie du Parc de Bagatelle · 16e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="www.lesculturellesdebagatelle.com?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-01" data-ongoing="1" data-lat="48.8394732464262" data-lon="2.43810608668011"
+      style="background:#FBEFC6;transform:rotate(2.1deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Festivals du parc Floral 2026 : Pestacles, le festival de musique jeune public de l'été parisien</h2>
+      <p class="accroche">Pour cette édition 2026, Pestacles invite petits et grands à découvrir en famille et au grand air des projets musicaux pluridisciplinaires exigeants et poétiques.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">1 juillet 2026 · 14h47<br><span class="autres">En cours, jusqu'au 2 sept. 2026</span><br>Parc Floral de Paris · 12e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://festivalsduparcfloral.paris/infos-pratiques/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-01" data-ongoing="0" data-lat="48.8372950157324" data-lon="2.27086996765382"
+      style="background:#FBEFC6;transform:rotate(-1.8deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">« Arbre », le nouveau spectacle du Cirque Bormann</h2>
+      <p class="accroche">Plongez dans l’univers fantastique de cette nouvelle création ! Ce spectacle unique mêle performances de cirque, danse, théâtre et effets spéciaux pour rendre hommage à nos racines. « Arbre » est une </p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">1 juillet 2026 · 15h<br><span class="autres">mer. 1 juil., sam. 4 juil., dim. 5 juil., mer. 8 juil., sam. 11 juil., dim. 12 juil., +36 autres 2026</span><br>Cirque Bormann · 15e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.cirquebormann.fr/reservation-famille?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 15 et 45 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-02" data-ongoing="0" data-lat="48.8856300147649" data-lon="2.34197097008209"
+      style="background:#FBEFC6;transform:rotate(1.1deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les Trois Beaux Days : JB DUNCKEL (piano solo) suivi par le Quintette à cordes et flûte</h2>
+      <p class="accroche">Rendez-vous les 01, 02 et 03 JUILLET pour Les Trois Beaux Days, 6e édition ! Les Trois Baudets seront bientôt de retour dans leur résidence estivale: Les Arènes de Montmartre ! 3 concerts en plein air</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">2 juillet 2026 · 20h<br>Arènes de Montmartre · 18e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://shotgun.live/events/jbdunckel-quintette?utm_source=qfap&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-03" data-ongoing="0" data-lat="48.8489039935399" data-lon="2.3431379824612"
+      style="background:#FBEFC6;transform:rotate(-1.5deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Festival European Polyphony « Paris-Rhodes » 2026</h2>
+      <p class="accroche">La création grecque, française et estonienne à l’honneur : musique, arts visuels et sonores.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">3 juillet 2026 · 2h<br>Amphithéâtre Richelieu de la Sorbonne · 5e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.festivaleuropeanpolyphony.com/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-03" data-ongoing="0" data-lat="48.8521490054448" data-lon="2.27952897654825"
+      style="background:#FBEFC6;transform:rotate(2.4deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Tous en scène - Concert Orchestre Philharmonique de Radio France et Orchestre à l'Ecole</h2>
+      <p class="accroche">Tous en scène - Concert Orchestre Philharmonique de Radio France et Orchestre à l'Ecole.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">3 juillet 2026 · 20h<br>Maison de la Radio et de la Musique · 16e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://billetterie.maisondelaradioetdelamusique.fr/selection/event/seat?perfId=10229343508516&amp;lang=fr&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · payant</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2026-07-03" data-ongoing="0" data-lat="48.8637219829781" data-lon="2.34546203275465"
+      style="background:#E4F3D9;transform:rotate(-2.2deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#173404">CONCERT KATHARSIS - Église Saint-Eustache</h2>
+      <p class="accroche">L’Ensemble Dulci Jubilo, sous la direction de Christopher Gibert, interprétera deux créations contemporaines majeures : Katharsis du compositeur grec Savvas Karantzias et Hymnus de Christopher Gibert.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">3 juillet 2026 · 20h30<br>Église Saint-Eustache · 1er<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://my.weezevent.com/concert-katharsis-rencontres-autour-de-la-mediterranee?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-04" data-ongoing="0" data-lat="48.8820130139971" data-lon="2.31898401971858"
+      style="background:#FBEFC6;transform:rotate(1.6deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Avec Raymond Devos et Georges Brassens : Entre copains d'abord</h2>
+      <p class="accroche">Tour tendre, musical, poétique et drôle sur Raymond Devos et Georges Brassens, interprété par Marie-Silvia Manuel qui est les deux à la fois! accompagnée au piano par Marc Goldfeder en complice discre</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">4 juillet 2026 · 16h<br><span class="autres">sam. 4 juil., dim. 5 juil., sam. 11 juil., dim. 12 juil., sam. 18 juil., dim. 19 juil., +1 autres 2026</span><br>Studio Hébertot · 17e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://studiohebertot.com/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 10 à 25 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-04" data-ongoing="0" data-lat="48.8539603" data-lon="2.3343506"
+      style="background:#FBEFC6;transform:rotate(-1.2deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les 4 Saisons de Vivaldi, Ave Maria et Célèbres Concertos</h2>
+      <p class="accroche">Retrouvez la magie de la musique classique à travers ce concert réunissant les œuvres les plus célèbres du répertoire.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">4 juillet 2026 · 20h45<br><span class="autres">sam. 4 juil., sam. 1 août, sam. 19 sept., ven. 13 nov., ven. 4 déc. 2026</span><br>Eglise Saint Germain des Prés · 6e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.orchestrehelios.com/concerts?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 0 à 60 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-05" data-ongoing="0" data-lat="48.8331540202876" data-lon="2.46734596903778"
+      style="background:#FBEFC6;transform:rotate(2.1deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Conte musical &quot;Pierre et le Loup&quot; - Quatuor de Saxophones</h2>
+      <p class="accroche">Le Quatuor de saxophones Isar, élèves du Parcours d'excellence en interprétation musicale présente &quot;Pierre et le Loup&quot; de Serge Prokofiev</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">5 juillet 2026 · 11h<br>Jardin d’Agronomie Tropicale René-Dumont · 12e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://chantdelaterre.com/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2026-07-07" data-ongoing="0" data-lat="48.8386" data-lon="2.2955"
+      style="background:#E4F3D9;transform:rotate(-1.8deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">Concerts en trio — Jardin Pierre-Adrien Dalpayrat</h2>
+      <p class="accroche">Un trio à vent en plein air, du classique au jazz. Gratuit.</p>
+      <p class="compos">Haydn · Mozart · Albéniz</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">7 juillet 2026 · 19h<br>Jardin Pierre-Adrien Dalpayrat · 15e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.orchestredechambredeparis.com/concert/concerts-en-trio-jardin-pierre-adrien-dalpayrat/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2026-07-08" data-ongoing="0" data-lat="48.8707131758484" data-lon="2.32542708125022"
+      style="background:#E4F3D9;transform:rotate(1.1deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#173404">Grande journée musicale à l'église de la Madeleine</h2>
+      <p class="accroche">Chorale exceptionnelle de 100 jeunes chanteurs présente un programme passionnant et varié de chansons sacrées et spirituelles.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">8 juillet 2026 · 10h45<br>église de la Madeleine · 8e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.eventbrite.fr/e/1990853967810?aff=oddtdtcreator&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · gratuit</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-08" data-ongoing="0" data-lat="48.8659599930355" data-lon="2.31635201830247"
+      style="background:#FBEFC6;transform:rotate(-1.5deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Concert gratuit de l'école Berkhamsted</h2>
+      <p class="accroche">Un concert familial de classiques 'Pop' et 'Film' au Kiosque à Musique.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">8 juillet 2026 · 16h<br>Kiosque à Musique · 8e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://fb.me/e/k0rPNNUlc?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · gratuit</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-10" data-ongoing="0" data-lat="48.8703680216244" data-lon="2.32426695629913"
+      style="background:#FBEFC6;transform:rotate(2.4deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les 4 Saisons de Vivaldi Intégrale &amp; Petite Musique de Nuit de Mozart</h2>
+      <p class="accroche">Retrouvez la magie de la musique classique à travers ce concert réunissant les œuvres les plus célèbres du répertoire.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">10 juillet 2026 · 20h<br><span class="autres">ven. 10 juil., ven. 31 juil., sam. 22 août, jeu. 24 sept., mer. 7 oct., mer. 28 oct., +4 autres 2026</span><br>Église de la Madeleine · 8e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://ensemblehelios.fnacspectacles.com/index.do?sort=date_asc&amp;page=1&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 0 à 60 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-07-10" data-ongoing="0" data-lat="48.8703680216244" data-lon="2.32426695629913"
+      style="background:#FBEFC6;transform:rotate(-2.2deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les 4 Saisons de Vivaldi Intégrale &amp; Petite Musique de Nuit de Mozart</h2>
+      <p class="accroche">Retrouvez la magie de la musique classique à travers ce concert réunissant les œuvres les plus célèbres du répertoire.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">10 juillet 2026 · 20h<br><span class="autres">ven. 10 juil., ven. 31 juil., sam. 22 août, jeu. 24 sept., mer. 7 oct., mer. 28 oct., +5 autres 2026</span><br>Église de la Madeleine · 8e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://ensemblehelios.fnacspectacles.com/index.do?sort=date_asc&amp;page=1&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 0 à 60 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2026-07-10" data-ongoing="0" data-lat="48.8547" data-lon="2.3644"
+      style="background:#E4F3D9;transform:rotate(1.6deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">Mozart | Ravel | Wolf — Hôtel de Sully</h2>
+      <p class="accroche">L'Orchestre de chambre de Paris en plein air, dans les jardins de l'Hôtel de Sully.</p>
+      <p class="compos">Mozart — Ouverture de Don Giovanni · Wolf — Sérénade italienne · Ravel — Le Tombeau de Couperin</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">10 juillet 2026 · 20h<br><span class="autres">ven. 10, sam. 11 juil. 2026</span><br>Hôtel de Sully (jardins) · 4e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://billetterie.orchestredechambredeparis.com/selection/event/date?productId=10229708040732&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · 10 € à 20 €</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-09-01" data-ongoing="0" data-lat="48.8576140063152" data-lon="2.3467579588046"
+      style="background:#FBEFC6;transform:rotate(-1.2deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les P'tits Fauteuils</h2>
+      <p class="accroche">La programmation jeune public du Châtelet !</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">1 septembre 2026 · 2h<br>Théâtre du Châtelet · 1er<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.chatelet.com/programmation/26-27/plis-sons/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · payant</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-09-04" data-ongoing="0" data-lat="48.8701055" data-lon="2.3236819"
+      style="background:#FBEFC6;transform:rotate(2.1deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les 4 Saisons de Vivaldi, Ave Maria, Concerto de Mendelssohn</h2>
+      <p class="accroche">Retrouvez la magie de la musique classique à travers ce concert réunissant les œuvres les plus célèbres du répertoire.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">4 septembre 2026 · 20h<br><span class="autres">ven. 4 sept., ven. 9 oct. 2026</span><br>Eglise de la Madeleine · 8e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.orchestrehelios.com/concerts?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 20 à 60 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2026-09-05" data-ongoing="0" data-lat="48.8353" data-lon="2.4478"
+      style="background:#E4F3D9;transform:rotate(-1.8deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">Festival Classique au Vert — Parc Floral</h2>
+      <p class="accroche">Un concert sur l'herbe, avec « L'Horloge » de Haydn.</p>
+      <p class="compos">Mozart — Ouverture de La Clémence de Titus · Mozart — Concerto pour violon n°5 · Haydn — Symphonie n°101 « L'Horloge »</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">5 septembre 2026 · 16h<br>Parc Floral de Paris · 12e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://festivalsduparcfloral.paris?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-09-11" data-ongoing="0" data-lat="48.8512377" data-lon="2.3332143"
+      style="background:#FBEFC6;transform:rotate(1.1deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les Grands Airs d'Opéra</h2>
+      <p class="accroche">Ne manquez pas l'incroyable performance de l'orchestre Hélios !</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">11 septembre 2026 · 20h45<br>Eglise Saint Sulpice · 6e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.paris.fr/evenements/les-grands-airs-d-opera-88793?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 20 à 60 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-09-12" data-ongoing="0"
+      style="background:#FBEFC6;transform:rotate(-1.5deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les 4 Saisons de Vivaldi, Ave Maria et Célèbres Concertos</h2>
+      <p class="accroche">Retrouvez la magie de la musique classique à travers ce concert réunissant les œuvres les plus célèbres du répertoire.</p>
+      <p class="compos">Vivaldi</p>
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">12 septembre 2026 · 23h45<br>Eglise Saint Sulpice · 6e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.orchestrehelios.com/concerts?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 0 à 60 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-09-13" data-ongoing="0" data-lat="48.8576140063152" data-lon="2.3467579588046"
+      style="background:#FBEFC6;transform:rotate(2.4deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Plis/Sons</h2>
+      <p class="accroche">Symphonie pour papier froissé. Dans le cadre des P'tits Fauteuils.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">13 septembre 2026 · 11h<br>Théâtre du Châtelet · 1er<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.chatelet.com/programmation/26-27/plis-sons/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6" data-date="2026-09-26" data-ongoing="0" data-lat="48.862399" data-lon="2.346853"
+      style="background:#FBEFC6;transform:rotate(-2.2deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les Racontines bilingues 0-3 ans LSF/FR</h2>
+      <p class="accroche">Venez découvrir, écouter et voir des comptines, jeux de doigts et premiers albums avec votre enfant de 0-3 ans !</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span></div>
+      <p class="infos">26 septembre 2026 · 10h30<br>Médiathèque de la Canopée · 1er<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.paris.fr/evenements/les-racontines-bilingues-francais-lsf-11122?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · gratuit</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-09-26" data-ongoing="0" data-lat="48.862399" data-lon="2.346853"
+      style="background:#FBEFC6;transform:rotate(1.6deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">L'Heure du conte 4-6 ans LSF/FR</h2>
+      <p class="accroche">La médiathèque de la Canopée vous invite à plonger dans les contes et histoires racontées par les bibliothécaires.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">26 septembre 2026 · 11h<br>Médiathèque de la Canopée · 1er<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.paris.fr/evenements/heure-du-conte-bilingue-lsf-francais-11130?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · gratuit</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-09-26" data-ongoing="0" data-lat="48.8512377" data-lon="2.3332143"
+      style="background:#FBEFC6;transform:rotate(-1.2deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les 4 Saisons de Vivaldi, Ave Maria, Concerto de Mendelssohn à l'église Saint-Sulpice</h2>
+      <p class="accroche">Retrouvez la magie de la musique classique à travers ce concert réunissant les œuvres les plus célèbres du répertoire.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">26 septembre 2026 · 21h<br><span class="autres">sam. 26 sept., sam. 31 oct. 2026</span><br>Eglise Saint Sulpice · 6e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.orchestrehelios.com/concerts?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 0 à 60 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-09-27" data-ongoing="0" data-lat="48.8891921088251" data-lon="2.39355686595773"
+      style="background:#FBEFC6;transform:rotate(2.1deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Bêtes de scène</h2>
+      <p class="accroche">Quoi de commun entre Janequin, Brassens, Rameau, Luis Mariano et les Frères Jacques ? Les animaux, dont le chant ou le comportement mis en musique dans des chansons, opéras ou pièces instrumentales in</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">27 septembre 2026 · 11h<br>Philharmonie de Paris · 19e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://philharmoniedeparis.fr/fr/activite/spectacle-participatif-en-famille/29372-betes-de-scene?itemId=145924&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · payant</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2026-10-03" data-ongoing="0" data-lat="48.8878" data-lon="2.3103"
+      style="background:#E4F3D9;transform:rotate(-1.8deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">Haydn | Mozart</h2>
+      <p class="accroche">Deux quatuors à cordes, comme une amitié entre Haydn et Mozart.</p>
+      <p class="compos">Haydn — Quatuor op. 33 n°4 · Mozart — Quatuor n°14 « Le Printemps »</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">3 octobre 2026 · 15h<br>Salle Cortot · 17e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://billetterie.orchestredechambredeparis.com/selection/event/date?productId=10229742674839&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · 5 € à 20 €</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2026-10-17" data-ongoing="0" data-lat="48.8878" data-lon="2.3103"
+      style="background:#E4F3D9;transform:rotate(1.1deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">D'une profonde légèreté</h2>
+      <p class="accroche">Deux quintettes avec clarinette, de Mozart à Françaix.</p>
+      <p class="compos">Françaix — Quintette avec clarinette · Mozart — Quintette avec clarinette K. 581</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">17 octobre 2026 · 15h<br>Salle Cortot · 17e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://billetterie.orchestredechambredeparis.com/selection/event/date?productId=10229742674840&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · 5 € à 20 €</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2026-11-21" data-ongoing="0" data-lat="48.8878" data-lon="2.3103"
+      style="background:#E4F3D9;transform:rotate(-1.5deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">Libre esthétique</h2>
+      <p class="accroche">Un quatuor qui voyage d'Ysaÿe à aujourd'hui.</p>
+      <p class="compos">Ysaÿe — Sonate pour deux violons (extrait) · Jessie Montgomery — Strum · Mendelssohn — Quatuor n°6 op. 80</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">21 novembre 2026 · 15h<br>Salle Cortot · 17e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://billetterie.orchestredechambredeparis.com/selection/event/date?productId=10229742674841&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · 5 € à 20 €</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-11-28" data-ongoing="0" data-lat="48.8539603" data-lon="2.3343506"
+      style="background:#FBEFC6;transform:rotate(2.4deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les 4 Saisons de Vivaldi, Ave Maria, Concerto de Mendelssohn à l'église Saint-Germain des Prés</h2>
+      <p class="accroche">Retrouvez la magie de la musique classique à travers ce concert réunissant les œuvres les plus célèbres du répertoire.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">28 novembre 2026 · 19h45<br>Eglise Saint Germain des Prés · 6e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.orchestrehelios.com/concerts?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 0 à 60 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-12-06" data-ongoing="0" data-lat="48.8576140063152" data-lon="2.3467579588046"
+      style="background:#FBEFC6;transform:rotate(-2.2deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Concert de Noël</h2>
+      <p class="accroche">Chœur d’enfants Sotto Voce. Dans le cadre des P'tits Fauteuils.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">6 décembre 2026 · 10h<br>Théâtre du Châtelet · 1er<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.chatelet.com/programmation/26-27/concert-de-noel-6/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 10 à 18 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-12-11" data-ongoing="0" data-lat="48.8701055" data-lon="2.3236819"
+      style="background:#FBEFC6;transform:rotate(1.6deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Le Messie de Haendel</h2>
+      <p class="accroche">Ne manquez pas l'incroyable performance de l orchestre Hélios</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">11 décembre 2026 · 19h45<br>Eglise de la Madeleine · 8e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.orchestrehelios.com/concerts?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · DE 60 à 20 €</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2026-12-12" data-ongoing="0" data-lat="48.8878" data-lon="2.3103"
+      style="background:#E4F3D9;transform:rotate(-1.2deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">Souvenir de Florence</h2>
+      <p class="accroche">Six cordes pour le grand frisson de Tchaïkovski.</p>
+      <p class="compos">Schulhoff — Sextuor à cordes · Tchaïkovski — Souvenir de Florence op. 70</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">12 décembre 2026 · 15h<br>Salle Cortot · 17e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://billetterie.orchestredechambredeparis.com/selection/event/date?productId=10229742674842&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · 5 € à 30 €</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2026-12-19" data-ongoing="0" data-lat="48.8878" data-lon="2.3103"
+      style="background:#E4F3D9;transform:rotate(2.1deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">Orient-Express</h2>
+      <p class="accroche">Un voyage en musique de Paris à Istanbul.</p>
+      <p class="compos">Ravel — Le Tombeau de Couperin · Mozart — Quatuor pour hautbois · Schubert — Trio à cordes</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">19 décembre 2026 · 15h<br>Salle Cortot · 17e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://billetterie.orchestredechambredeparis.com/selection/event/date?productId=10229742674843&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · 5 € à 20 €</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-12-20" data-ongoing="0" data-lat="48.8512498423158" data-lon="2.33414267100684"
+      style="background:#FBEFC6;transform:rotate(-1.8deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Grand Concert de Chants Traditionnels de Noël</h2>
+      <p class="accroche">Plongez dans la magie de Noël avec notre Grand Concert de Chants Traditionnels le 20 décembre à partir de 20h45 - On espère vous y entendre chanter !</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">20 décembre 2026 · 20h<br><span class="autres">dim. 20 déc., mar. 22 déc., sam. 26 déc. 2026</span><br>Eglise Saint-Sulpice · 6e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.orchestrehelios.com/concerts?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 20 à 60 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2026-12-30" data-ongoing="0" data-lat="48.8512377" data-lon="2.3332143"
+      style="background:#FBEFC6;transform:rotate(1.1deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Boléro de Ravel / Casse Noisette / Le Lac des Cygnes / L’Arlésienne de Bizet (extraits)</h2>
+      <p class="accroche">Ne manquez pas l'incroyable performance de l'orchestre Hélios dans une prestigieuse église parisienne</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">30 décembre 2026 · 19h45<br>Eglise Saint Sulpice · 6e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.paris.fr/evenements/bolero-de-ravel-casse-noisette-le-lac-des-cygnes-l-arlesienne-de-bizet-extraits-85037?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2027-01-02" data-ongoing="0" data-lat="48.8512377" data-lon="2.3332143"
+      style="background:#FBEFC6;transform:rotate(-1.5deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Concert du Nouvel An - Les Valses de Johann Strauss</h2>
+      <p class="accroche">Ne manquez pas ce concert du Nouvel An avec au programme Les Valses de Johann Strauss sous la direction de Romain Dumas avec l'Orchestre Hélios.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">2 janvier 2027 · 19h45<br>Eglise Saint Sulpice · 6e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.orchestrehelios.com/concerts?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2027-01-17" data-ongoing="0" data-lat="48.8576140063152" data-lon="2.3467579588046"
+      style="background:#FBEFC6;transform:rotate(2.4deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">La cuisine musicale</h2>
+      <p class="accroche">Dans le cadre des P'tits Fauteuils, la programmation jeune public du Châtelet !</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">17 janvier 2027 · 10h<br>Théâtre du Châtelet · 1er<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.chatelet.com/programmation/26-27/la-cuisine-musicale/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2027-01-17" data-ongoing="0"
+      style="background:#E4F3D9;transform:rotate(-2.2deg)">
+      <div class="c-haut"><span class="type">Atelier · 1h45</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">Les Dimanches Croq'Musique, à la rencontre des instruments</h2>
+      <p class="accroche">Rencontrer les instruments un par un, puis les entendre en vrai avec le violoncelliste Edgar Moreau.</p>
+      <p class="compos">Karol Beffa · </p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">17 janvier 2027 · 17h<br>Salle Cortot · 75017<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://sallecortot.com/event/les-dimanches-croqmusique-ateliers-a-la-rencontre-des-instruments-de-musique/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · 15 €</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2027-01-23" data-ongoing="0" data-lat="48.8878" data-lon="2.3103"
+      style="background:#E4F3D9;transform:rotate(1.6deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">Félix, Robert et Clara</h2>
+      <p class="accroche">Une histoire d'amour et d'amitié entre trois compositeurs.</p>
+      <p class="compos">Clara Schumann — Trois variations op. 20 · Mendelssohn — Quatuor n°1 op. 44 · Robert Schumann — Quatuor n°1 op. 41</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">23 janvier 2027 · 15h<br>Salle Cortot · 17e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://billetterie.orchestredechambredeparis.com/selection/event/date?productId=10229742674844&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · 5 € à 20 €</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2027-01-31" data-ongoing="0" data-lat="48.8576140063152" data-lon="2.3467579588046"
+      style="background:#FBEFC6;transform:rotate(-1.2deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">L'orchestre cherche et trouve autour du monde</h2>
+      <p class="accroche">Dans le cadre des P'tits Fauteuils, la programmation jeune public du Châtelet !</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">31 janvier 2027 · 15h<br>Théâtre du Châtelet · 1er<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.chatelet.com/programmation/26-27/lorchestre-cherche-et-trouve/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 10 à 18 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2027-02-27" data-ongoing="0" data-lat="48.8878" data-lon="2.3103"
+      style="background:#E4F3D9;transform:rotate(2.1deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">D'un matin de printemps</h2>
+      <p class="accroche">La musique française lumineuse de Franck et Lili Boulanger.</p>
+      <p class="compos">César Franck — Quintette avec piano · Lili Boulanger — Nocturne et Cortège · Lili Boulanger — D'un matin de printemps</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">27 février 2027 · 15h<br>Salle Cortot · 17e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://billetterie.orchestredechambredeparis.com/selection/event/date?productId=10229742674845&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · 5 € à 20 €</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2027-03-07" data-ongoing="0" data-lat="48.8576140063152" data-lon="2.3467579588046"
+      style="background:#FBEFC6;transform:rotate(-1.8deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Crescendo</h2>
+      <p class="accroche">Dans le cadre des P'tits Fauteuils, la programmation jeune public du Châtelet !</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">7 mars 2027 · 15h<br>Théâtre du Châtelet · 1er<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.chatelet.com/programmation/26-27/crescendo/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 10 à 18 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2027-03-13" data-ongoing="0" data-lat="48.8878" data-lon="2.3103"
+      style="background:#E4F3D9;transform:rotate(1.1deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">Piano et cordes</h2>
+      <p class="accroche">Le piano de Javier Perianes au milieu des cordes.</p>
+      <p class="compos">Mozart — Concerto pour piano n°12 K. 414 (version quintette) · Schumann — Quintette avec piano op. 44</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">13 mars 2027 · 15h<br>Salle Cortot · 17e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://billetterie.orchestredechambredeparis.com/selection/event/date?productId=10229742674846&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · 5 € à 30 €</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2027-03-21" data-ongoing="0" data-lat="48.8576140063152" data-lon="2.3467579588046"
+      style="background:#FBEFC6;transform:rotate(-1.5deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Bibbidi Doo</h2>
+      <p class="accroche">Dans le cadre des P'tits Fauteuils, la programmation jeune public du Châtelet !</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">21 mars 2027 · 15h<br>Théâtre du Châtelet · 1er<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://www.chatelet.com/programmation/26-27/bibbidi-boo/?utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 10 à 18 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2027-03-31" data-ongoing="0" data-lat="48.8922441" data-lon="2.3878519"
+      style="background:#FBEFC6;transform:rotate(2.4deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">« The Belt » de Ambiguous Dance Company</h2>
+      <p class="accroche">De la révolution industrielle à la fureur des raves contemporaines, Ambiguous Dance Company promet de transformer tout Chaillot en une machine à explorer le temps. Avec The Belt, le chorégraphe Boram </p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">31 mars 2027 · 20h<br><span class="autres">mer. 31 mars, jeu. 1 avr., ven. 2 avr., sam. 3 avr. 2027</span><br>La Villette · 19e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://indiv.themisweb.fr/0218/fChoixSeanceWidget.aspx?idstructure=0218&amp;EventId=1727&amp;request=QcE+w0WHSuBQMpsjSY4ol/xOunNtETpTyJj49lhe2VcoJnxsu+HxdfnmIXQ327TR&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · De 17 à 35 euros.</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2027-04-03" data-ongoing="0" data-lat="48.8891921088251" data-lon="2.39355686595773"
+      style="background:#FBEFC6;transform:rotate(-2.2deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Le Musée prend l'eau</h2>
+      <p class="accroche">Une baleine bleue, un poisson binoclard et un petit navire embarquent petits et grands pour une traversée pleine de surprises.</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">3 avril 2027 · 2h<br>Philharmonie de Paris · 19e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://philharmoniedeparis.fr/fr/activite/concert-promenade-au-musee/29770-le-musee-prend-leau?itemId=147928&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · payant</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2027-04-03" data-ongoing="0" data-lat="48.8891921088251" data-lon="2.39355686595773"
+      style="background:#FBEFC6;transform:rotate(1.6deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">La Renverse</h2>
+      <p class="accroche">Un gardien de phare découvre le journal de bord d’une navigatrice solitaire. Après en avoir lu les dernières pages, aussi mystérieuses que désespérées, il décide de partir à la recherche de son navire</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">3 avril 2027 · 11h<br>Philharmonie de Paris · 19e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://philharmoniedeparis.fr/fr/activite/spectacle-en-famille/29479-la-renverse?itemId=145969&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · payant</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2027-04-03" data-ongoing="0" data-lat="48.8891921088251" data-lon="2.39355686595773"
+      style="background:#FBEFC6;transform:rotate(-1.2deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Les Eaux du Monde</h2>
+      <p class="accroche">Des fontaines de Rome à La Grande Vague de Kanagawa, ce concert nous emmène surfer, entre fleuves et océans, sur les flots du monde entier, par la grâce de musiques cristallines et aquatiques illustré</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">3 avril 2027 · 15h<br>Philharmonie de Paris · 19e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://philharmoniedeparis.fr/fr/activite/concert-en-famille/29763-les-eaux-du-monde?itemId=147915&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · payant</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2027-04-03" data-ongoing="0" data-lat="48.8878" data-lon="2.3103"
+      style="background:#E4F3D9;transform:rotate(2.1deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">Élégance classique</h2>
+      <p class="accroche">La flûte mène la danse, entre Mozart et Reicha.</p>
+      <p class="compos">Dotzauer — Quatuor pour flûte op. 38 · Reicha — Quatuor pour flûte op. 98 n°3 · Mozart — Quatuor pour flûte K. 285</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">3 avril 2027 · 15h<br>Salle Cortot · 17e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://billetterie.orchestredechambredeparis.com/selection/event/date?productId=10229742674847&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · 5 € à 20 €</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="3-6 6-12" data-date="2027-05-22" data-ongoing="0" data-lat="48.8878" data-lon="2.3103"
+      style="background:#E4F3D9;transform:rotate(-1.8deg)">
+      <div class="c-haut"><span class="type">Concert</span><span class="cdc"><svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" style="flex:none"><g fill="#fff"><polygon points="12,2 15,9 22,9.5 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9.5 9,9"/></g></svg> Coup de cœur</span></div>
+      <h2 style="color:#173404">Équinoxe</h2>
+      <p class="accroche">Cinq souffles racontent le passage du jour à la nuit.</p>
+      <p class="compos">Nielsen — Quintette à vent op. 43 · Barber — Summer Music · Sciarrino — Il silenzio degli oracoli</p>
+      <div class="pastilles"><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">22 mai 2027 · 15h<br>Salle Cortot · 17e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://billetterie.orchestredechambredeparis.com/selection/event/date?productId=10229742674848&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · 5 € à 20 €</a>
+        <span class="ocp">programmé par l'OCP</span>
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2027-06-20" data-ongoing="0" data-lat="48.8891921088251" data-lon="2.39355686595773"
+      style="background:#FBEFC6;transform:rotate(1.1deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Le Roi aux oreilles d’âne</h2>
+      <p class="accroche">Surfant sur le succès de leur oratorio Mytho mais pas trop, les Lunaisiens remettent le couvert en revisitant l’histoire du roi Midas qu’Apollon a affublé d’oreilles d’âne. Une basse vengeance : Midas</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">20 juin 2027 · 11h<br>Philharmonie de Paris · 19e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://philharmoniedeparis.fr/fr/activite/spectacle-en-famille/30014-le-roi-aux-oreilles-dane?itemId=148618&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · payant</a>
+        
+      </div>
+    </article>
+
+    <article class="carte" data-ages="0-3 3-6 6-12" data-date="2027-06-26" data-ongoing="0" data-lat="48.8891921088251" data-lon="2.39355686595773"
+      style="background:#FBEFC6;transform:rotate(-1.5deg)">
+      <div class="c-haut"><span class="type">Concert</span></div>
+      <h2 style="color:#412402">Tec-tec</h2>
+      <p class="accroche">Tec-Tec est né de l’envie de jouer et de faire la fête avec les enfants et leurs parents. Inspirée par le mouvement tropicaliste émergé au Brésil en 1967, la Compagnie Blah Blah Blah a imaginé ce conc</p>
+      
+      <div class="pastilles"><span class="pastille" style="background:#F4C744;color:#412402"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#412402"><circle cx="12" cy="12" r="10"/></g></svg>0-3 ans</span><span class="pastille" style="background:#7CC366;color:#173404"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#173404"><polygon points="12,2 22,21 2,21"/></g></svg>3-6 ans</span><span class="pastille" style="background:#2F6BEF;color:#16233F"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true" style="flex:none"><g fill="#16233F"><polygon points="12,1 23,12 12,23 1,12"/></g></svg>6-12 ans</span></div>
+      <p class="infos">26 juin 2027 · 16h<br><span class="autres">sam. 26 juin, dim. 27 juin 2027</span><br>Philharmonie de Paris · 19e<span class="dist"></span></p>
+      <div class="c-bas">
+        <a class="billet" href="https://philharmoniedeparis.fr/fr/activite/concert-en-famille/29730-tec-tec?itemId=147868&amp;utm_source=aportee&amp;utm_medium=site" target="_blank" rel="noopener">Réserver · payant</a>
+        
+      </div>
+    </article></div>
+    <p class="vide" id="aucun" style="display:none">Aucun événement pour ce choix. Essaie une autre période ou un autre âge.</p>
+  </main>
+
+  
+  <section class="band" id="playlists">
+    <p class="eyebrow">à écouter à la maison</p>
+    <h2 class="sec">Nos <span class="e">playlists</span></h2>
+    <p class="intro">Faire entrer la belle musique dans le quotidien, ou préparer une sortie. Choisies une par une, comme le reste.</p>
+    <div class="plgrid">
+      <a class="pl pl1" href="#"><span class="play">▶</span><h3>Premiers sons, 0-3 ans</h3><p>Des berceuses et des cordes tout en douceur, pour les toutes petites oreilles.</p></a>
+      <a class="pl pl2" href="#"><span class="play">▶</span><h3>Reconnaître les instruments</h3><p>Un par un, façon « Pierre et le Loup » : la flûte, le basson, le violoncelle.</p></a>
+      <a class="pl pl3" href="#"><span class="play">▶</span><h3>Les tubes qu'ils fredonnent déjà</h3><p>Ces mélodies classiques qu'ils connaissent sans le savoir.</p></a>
+      <a class="pl pl4" href="#"><span class="play">▶</span><h3>Avant le concert</h3><p>Le programme de la sortie du week-end, à découvrir en amont.</p></a>
+    </div>
+  </section>
+  
+  <section class="band" id="mediation">
+    <p class="eyebrow">pour aller plus loin</p>
+    <h2 class="sec">Comprendre <span class="e">en s'amusant</span></h2>
+    <p class="intro">De petits contenus pour donner des clés aux familles, sans jamais faire la leçon.</p>
+    <div class="medgrid">
+      <div class="med"><span class="tag">bientôt</span><h3>L'instrument du mois</h3><p>Une fiche courte et rigolote : à quoi il ressemble, comment il sonne, où l'entendre.</p></div>
+      <div class="med"><span class="tag">bientôt</span><h3>3 choses à écouter avant d'y aller</h3><p>Préparer la sortie en famille, en trois extraits.</p></div>
+      <div class="med"><span class="tag">bientôt</span><h3>Le mot de la musique</h3><p>Symphonie, quatuor, ouverture... le vocabulaire, expliqué simplement.</p></div>
+    </div>
+  </section>
+  
+  <section class="boutique" id="boutique">
+    <div class="bout-in">
+      <div>
+        <p class="eyebrow">bientôt</p>
+        <h2 class="sec">La <span class="e2">boutique</span> à portée</h2>
+        <p class="intro2">Des goodies pensés pour les petites oreilles. À découvrir très vite.</p>
+      </div>
+      <div class="bout-shapes" aria-hidden="true"><span>●</span><span>▲</span><span>◆</span><span>★</span></div>
+    </div>
+  </section>
+
+  <footer id="news">
+    <div class="foot">
+      <div class="news">
+        <h3>Recevez nos coups de cœur</h3>
+        <form onsubmit="return false">
+          <input type="email" placeholder="votre e-mail" aria-label="votre e-mail">
+          <button class="sinscrire" type="submit">Je m'inscris</button>
+        </form>
+      </div>
+      <div class="meta">une initiative de l'Orchestre de chambre de Paris.<br><br>Suivez-nous sur <a href="#">Instagram</a>.</div>
+    </div>
+  </footer>
+
+  <script>
+    const cartes = [...document.querySelectorAll('.carte')]
+    let curAge = 'tous', curPer = 'tous', userPos = null
+    const finSemaine = (now) => { const d = new Date(now); d.setDate(now.getDate() + ((7 - now.getDay()) % 7)); d.setHours(23, 59, 59, 999); return d }
+    const finMois = (now) => new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999)
+    function okPeriode(c) {
+      if (curPer === 'tous') return true
+      if (c.dataset.ongoing === '1') return true
+      const ds = c.dataset.date; if (!ds) return false
+      const d = new Date(ds + 'T12:00:00'); const now = new Date()
+      if (curPer === 'semaine') return d <= finSemaine(now)
+      if (curPer === 'mois') return d <= finMois(now)
+      if (curPer === 'weekend') { const wd = d.getDay(); return (wd === 0 || wd === 6) && (d - now) <= 7 * 864e5 }
+      return true
+    }
+    const okAge = (c) => curAge === 'tous' || (c.dataset.ages || '').split(' ').includes(curAge)
+    function appliquer() {
+      let n = 0
+      cartes.forEach((c) => { const ok = okAge(c) && okPeriode(c); c.style.display = ok ? '' : 'none'; if (ok) n++ })
+      const v = document.getElementById('aucun'); if (v) v.style.display = n ? 'none' : ''
+    }
+    function brancher(sel, set) {
+      const btns = [...document.querySelectorAll(sel + ' .filtre')]
+      btns.forEach((b) => b.addEventListener('click', () => { btns.forEach((x) => x.classList.remove('actif')); b.classList.add('actif'); set(b); appliquer() }))
+    }
+    brancher('#filtres-periode', (b) => { curPer = b.dataset.periode })
+    brancher('#filtres-age', (b) => { curAge = b.dataset.age })
+    function distKm(la1, lo1, la2, lo2) { const R = 6371, r = Math.PI / 180; const dLa = (la2 - la1) * r, dLo = (lo2 - lo1) * r; const a = Math.sin(dLa / 2) ** 2 + Math.cos(la1 * r) * Math.cos(la2 * r) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(a)) }
+    const btnGeo = document.getElementById('btn-geo'), geoMsg = document.getElementById('geo-msg'), grille = document.getElementById('grille')
+    btnGeo.addEventListener('click', () => {
+      if (!navigator.geolocation) { geoMsg.textContent = 'Géolocalisation non disponible.'; return }
+      geoMsg.textContent = 'Localisation…'
+      navigator.geolocation.getCurrentPosition((pos) => {
+        userPos = {lat: pos.coords.latitude, lon: pos.coords.longitude}
+        btnGeo.classList.add('actif'); geoMsg.textContent = ''
+        cartes.forEach((c) => {
+          const la = parseFloat(c.dataset.lat), lo = parseFloat(c.dataset.lon), span = c.querySelector('.dist')
+          if (!isNaN(la) && !isNaN(lo)) { const d = distKm(userPos.lat, userPos.lon, la, lo); c.dataset.km = d; if (span) span.textContent = ' · ' + (d < 10 ? d.toFixed(1).replace('.', ',') : Math.round(d)) + ' km' }
+          else c.dataset.km = ''
+        })
+        ;[...cartes].sort((a, b) => { const ka = parseFloat(a.dataset.km), kb = parseFloat(b.dataset.km); if (isNaN(ka)) return 1; if (isNaN(kb)) return -1; return ka - kb }).forEach((c) => grille.appendChild(c))
+      }, () => { geoMsg.textContent = 'Localisation refusée.' })
+    })
+  </script>
+</body>
+</html>
